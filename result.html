@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Результат</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Результат</h1>
+    <p id="score"></p>
+    <p id="level"></p>
+    <a href="index.html" class="btn">На головну</a>
+  </div>
+
+  <script>
+    const score = localStorage.getItem("score");
+    document.getElementById("score").innerText = `Правильних відповідей: ${score}`;
+
+    let level = "Новачок";
+    if (score >= 3) level = "Отаку";
+    if (score >= 5) level = "Легенда";
+
+    document.getElementById("level").innerText = `Твій рівень: ${level}`;
+  </script>
+</body>
+</html>
