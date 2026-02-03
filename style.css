@@ -560,6 +560,23 @@ body.home .home-wrap{
   position: relative;
   z-index: 5;
 }
+/* Hide top navigation on mobile (use big buttons instead) */
+@media (max-width: 600px){
+  .topbar{
+    width: 94%;
+    margin-top: 10px;
+  }
+
+  .nav{
+    display: none;
+  }
+
+  .brand{
+    margin: 0 auto;     /* центрує лого */
+    display: block;
+  }
+}
+
 
 
 
