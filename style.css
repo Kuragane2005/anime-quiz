@@ -545,6 +545,22 @@ body.home::before,
 body.home::after {
   pointer-events: none;
 }
+/* ===== FORCE HOME LAYOUT (put at VERY end) ===== */
+body.home{
+  display:block !important;
+  min-height:100vh;
+  overflow-x:hidden;
+  overflow-y:auto;
+  align-items: initial !important;
+  justify-content: initial !important;
+}
+
+body.home .topbar,
+body.home .home-wrap{
+  position: relative;
+  z-index: 5;
+}
+
 
 
 
