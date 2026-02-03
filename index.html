@@ -3,38 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anime Quiz</title>
+  <title>Anime Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="home">
 
-<header class="topbar">
-  <a class="brand" href="index.html">ANIME QUIZ</a>
-  <nav class="nav">
-    <a href="tests.html">Тести</a>
-    <a href="openings.html">Опенінги</a>
-    <a href="leaderboard.html">Лідери</a>
-    <a href="ranks.html">Ранги</a>
-  </nav>
-</header>
+  <header class="topbar">
+    <a class="brand" href="index.html">ANIME QUIZ</a>
 
-<div class="container">
-  <h1>🔥 ANIME HUB 🔥</h1>
-  <p>Обирай режим і прокачуй свій ранг</p>
+    <nav class="nav">
+      <a href="tests.html">Тести</a>
+      <a href="openings.html">Опенінги</a>
+      <a href="leaderboard.html">Лідери</a>
+      <a href="ranks.html">Ранги</a>
+    </nav>
+  </header>
 
-  <div class="grid">
-    <a class="card" href="tests.html">🧠 Тести</a>
-    <a class="card" href="openings.html">🎵 Вгадай по опенінгу</a>
-    <a class="card" href="leaderboard.html">🏆 Таблиця лідерів</a>
-    <a class="card" href="ranks.html">📈 Ранги</a>
-  </div>
+  <main class="home-wrap">
+    <section class="hero">
+      <div class="hero-card">
+        <h1>🔥 ANIME HUB 🔥</h1>
+        <p class="subtitle">Обирай режим, заробляй XP і піднімай ранг.</p>
 
-  <a class="btn" href="quiz.html">▶ Почати швидкий тест</a>
-</div>
+        <div class="mode-grid">
+          <a class="mode" href="tests.html">🧠 <span>Тести</span></a>
+          <a class="mode" href="openings.html">🎵 <span>Вгадай по опенінгу</span></a>
+          <a class="mode" href="leaderboard.html">🏆 <span>Таблиця лідерів</span></a>
+          <a class="mode" href="ranks.html">📈 <span>Ранги</span></a>
+        </div>
+
+        <div class="cta-row">
+          <a class="cta" href="quiz.html">▶ Почати швидкий тест</a>
+          <a class="cta ghost" href="ranks.html">👑 Мій ранг</a>
+        </div>
+
+        <p class="hint">Порада: проходь тести щодня — прокачаєшся швидше 😈</p>
+      </div>
+    </section>
+  </main>
 
 </body>
 </html>
+
+
 
 
 
