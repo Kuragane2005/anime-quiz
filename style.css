@@ -330,5 +330,32 @@ body::before {
   .nav{ width:100%; justify-content:center; }
   .nav a{ flex:1; text-align:center; }
 }
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+  margin: 16px 0;
+}
+
+.card{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 12px;
+  border-radius:16px;
+  text-decoration:none;
+  color:#fff;
+  font-family: Arial, sans-serif;
+  background: rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.10);
+  transition: transform .15s ease;
+}
+
+.card:hover{ transform: scale(1.02); }
+
+@media (max-width:480px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
 
 
