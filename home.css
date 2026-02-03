@@ -145,3 +145,9 @@ body{
   .mode-grid{ grid-template-columns: 1fr; }
   .cta-row{ grid-template-columns: 1fr; }
 }
+.topbar{
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.25);
+  border-radius: 16px;
+}
+
