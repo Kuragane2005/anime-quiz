@@ -356,6 +356,39 @@ body::before {
 @media (max-width:480px){
   .grid{ grid-template-columns: 1fr; }
 }
+.leader-list{
+  margin-top:14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  font-family: Arial, sans-serif;
+}
+.leader-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 14px;
+  border-radius:14px;
+  background: rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.10);
+}
+.leader-row b{ margin-right:10px; }
+.rank-list{
+  margin-top:14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  font-family: Arial, sans-serif;
+}
+.rank-row{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 14px;
+  border-radius:14px;
+  background: rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.10);
+}
+
 
 
 
