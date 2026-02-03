@@ -281,32 +281,6 @@ body::before {
   .result-actions {
     grid-template-columns: 1fr;
   }
-}
-.topbar{
-  width: 100%;
-  max-width: 920px;
-  margin: 12px auto 0;
-  padding: 12px 14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.brand{
-  text-decoration:none;
-  color:#fff;
-  font-size:22px;
-  letter-spacing:2px;
-}
-
-.nav{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-}
-
 .nav a{
   font-family: Arial, sans-serif;
   text-decoration:none;
@@ -549,6 +523,27 @@ body::before {
   .mode-grid{ grid-template-columns: 1fr; }
   .cta-row{ grid-template-columns: 1fr; }
 }
+/* =========================
+   FIX: normal layout for HOME
+   ========================= */
+body.home {
+  display: block;            /* забирає flex-центр */
+  overflow-x: hidden;        /* по X можна, по Y скрол */
+  overflow-y: auto;
+}
+
+body.home .topbar,
+body.home .home-wrap {
+  position: relative;
+  z-index: 3;                /* вище фону/зірок */
+}
+
+/* фон не буде душити кліки */
+body.home::before,
+body.home::after {
+  pointer-events: none;
+}
+
 
 
 
