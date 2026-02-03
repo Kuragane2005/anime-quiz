@@ -249,3 +249,7 @@ h1{
   .grid{ grid-template-columns: 1fr; }
   .actions{ grid-template-columns: 1fr; }
 }
+.tile.primary:hover{
+  box-shadow: 0 0 25px rgba(255, 60, 160, 0.35);
+}
+
