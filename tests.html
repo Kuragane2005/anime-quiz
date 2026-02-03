@@ -3,28 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Тести</title>
+  <title>Тести — Anime Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tests.css" />
 </head>
-<body>
+<body class="page">
 
-<header class="topbar">
-  <a class="brand" href="index.html">ANIME QUIZ</a>
-  <nav class="nav">
-    <a href="tests.html">Тести</a>
-    <a href="openings.html">Опенінги</a>
-    <a href="leaderboard.html">Лідери</a>
-    <a href="ranks.html">Ранги</a>
-  </nav>
-</header>
+  <header class="topbar">
+    <a class="brand" href="index.html">🔥 ANIME HUB</a>
+    <nav class="nav">
+      <a class="active" href="tests.html">Тести</a>
+      <a href="openings.html">Опенінги</a>
+      <a href="leaders.html">Лідери</a>
+      <a href="ranks.html">Ранги</a>
+    </nav>
+  </header>
 
-<div class="container">
-  <h1>🧠 Тести</h1>
-  <p>Обери тест (поки один, далі додамо категорії)</p>
+  <main class="wrap">
+    <section class="card">
+      <h1>🧠 Тести</h1>
+      <p class="subtitle">Обирай режим і набивай XP. Нові тести зʼявлятимуться тут.</p>
 
-  <a class="btn" href="quiz.html">⚔ Швидкий тест</a>
-</div>
+      <div class="grid">
+        <!-- Готовий -->
+        <a class="tile primary" href="quiz.html">
+          <div class="tile-top">
+            <div class="tile-icon">⚡</div>
+            <div class="tile-title">Швидкий тест</div>
+          </div>
+          <div class="tile-desc">5 питань • таймер • результат в кінці</div>
+        </a>
+
+        <!-- Заглушки (скоро) -->
+        <a class="tile disabled" href="#" aria-disabled="true">
+          <div class="tile-top">
+            <div class="tile-icon">🔥</div>
+            <div class="tile-title">Складний тест</div>
+          </div>
+          <div class="tile-desc">Скоро • 20 питань • без підказок</div>
+          <div class="badge">SOON</div>
+        </a>
+
+        <a class="tile disabled" href="#" aria-disabled="true">
+          <div class="tile-top">
+            <div class="tile-icon">🎭</div>
+            <div class="tile-title">Персонажі</div>
+          </div>
+          <div class="tile-desc">Скоро • хто це? з якого аніме?</div>
+          <div class="badge">SOON</div>
+        </a>
+
+        <a class="tile disabled" href="#" aria-disabled="true">
+          <div class="tile-top">
+            <div class="tile-icon">🖼️</div>
+            <div class="tile-title">По кадру</div>
+          </div>
+          <div class="tile-desc">Скоро • вгадай аніме по скріну</div>
+          <div class="badge">SOON</div>
+        </a>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="quiz.html">▶ Почати швидкий тест</a>
+        <a class="btn ghost" href="index.html">← На головну</a>
+      </div>
+
+      <p class="hint">Порада: додай нові питання — і “Швидкий тест” стане топовим режимом 😈</p>
+    </section>
+  </main>
 
 </body>
 </html>
+
