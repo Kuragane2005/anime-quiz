@@ -1,0 +1,164 @@
+/* ranks.css */
+
+body.page-ranks{
+  margin:0;
+  min-height:100vh;
+  color:#fff;
+  font-family:'Bangers', cursive;
+  overflow-x:hidden;
+  overflow-y:auto;
+
+  background:
+    radial-gradient(circle at top, #2b145f 0%, transparent 45%),
+    linear-gradient(135deg, #070812, #120a2a, #070812);
+}
+
+body.page-ranks::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("bg.jpg") center/cover no-repeat;
+  opacity:.12;
+  filter: blur(1px) saturate(1.1);
+  pointer-events:none;
+  z-index:0;
+}
+body.page-ranks::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image: radial-gradient(#ffffff22 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events:none;
+  z-index:1;
+}
+
+.wrap{
+  position:relative;
+  z-index:2;
+  width:min(980px, 94%);
+  margin: 16px auto 44px;
+}
+
+/* card */
+.rank-card{
+  width:min(760px, 100%);
+  margin: 0 auto;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(15, 15, 25, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 30px rgba(255, 0, 140, 0.20);
+  text-align:center;
+}
+
+.rank-card h1{
+  margin: 0 0 10px;
+  font-size: 42px;
+  letter-spacing:2px;
+}
+
+.sub{
+  margin: 0 0 16px;
+  font-family: Arial, sans-serif;
+  opacity:.85;
+  font-size: 14px;
+}
+
+/* boxes */
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 14px 0 14px;
+}
+
+.box{
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  text-align:left;
+  font-family: Arial, sans-serif;
+}
+.label{
+  opacity:.85;
+  font-size: 13px;
+}
+.value{
+  margin-top: 6px;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+/* progress */
+.progress{
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  font-family: Arial, sans-serif;
+  text-align:left;
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  gap: 10px;
+  font-size: 13px;
+  opacity:.9;
+  margin-bottom: 10px;
+}
+
+.bar{
+  height: 12px;
+  width: 100%;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  overflow:hidden;
+}
+.fill{
+  height: 100%;
+  width: 35%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff2f92, #7a3cff);
+  transition: width .3s ease;
+}
+
+.hint{
+  margin-top: 10px;
+  font-size: 13px;
+  opacity:.85;
+}
+
+/* buttons */
+.actions{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn{
+  display:block;
+  text-decoration:none;
+  color:#fff;
+  text-align:center;
+  padding: 14px 14px;
+  border-radius: 16px;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(90deg, #ff2f92, #7a3cff);
+  border: 0;
+}
+.btn.ghost{
+  background: rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+}
+
+@media (max-width: 520px){
+  .rank-card h1{ font-size: 34px; }
+  .grid{ grid-template-columns: 1fr; }
+  .actions{ grid-template-columns: 1fr; }
+}
