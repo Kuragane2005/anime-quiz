@@ -28,6 +28,8 @@ const questions = [
 
 let current = 0;
 let score = 0;
+let streak = 0;
+let earnedXP = 0;
 let timeLeft = 10;
 let timerInterval;
 
@@ -35,50 +37,45 @@ const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
 const nextBtn = document.getElementById("nextBtn");
 const timerEl = document.getElementById("timer");
-const sClick = document.getElementById("sClick");
-const sCorrect = document.getElementById("sCorrect");
-const sWrong = document.getElementById("sWrong");
-const containerEl = document.querySelector(".container");
 
-function playSound(audioEl) {
-  if (!audioEl) return;
-  audioEl.currentTime = 0;
-  audioEl.play().catch(() => {}); // на деяких браузерах може блокуватись
-}
+const progressText = document.getElementById("progressText");
+const progressFill = document.getElementById("progressFill");
+const streakText = document.getElementById("streakText");
+const xpText = document.getElementById("xpText");
 
-function vibrate(ms = 40) {
-  if (navigator.vibrate) navigator.vibrate(ms);
-}
+function updateProgressUI() {
+  const total = questions.length;
+  const currentNum = current + 1;
 
-function shake() {
-  if (!containerEl) return;
-  containerEl.classList.remove("shake");
-  // примусово перезапустити анімацію
-  void containerEl.offsetWidth;
-  containerEl.classList.add("shake");
+  progressText.textContent = `Питання ${currentNum}/${total}`;
+  progressFill.style.width = `${(currentNum / total) * 100}%`;
+  streakText.textContent = `🔥 Серія: ${streak}`;
+  xpText.textContent = `⚡ XP: ${earnedXP}`;
 }
 
 function loadQuestion() {
   clearInterval(timerInterval);
   timeLeft = 10;
 
-  timerEl.innerText = `⏱ ${timeLeft}`;
+  timerEl.textContent = `⏱ ${timeLeft}`;
   nextBtn.classList.add("hidden");
   answersEl.innerHTML = "";
 
-  questionEl.innerText = questions[current].question;
+  questionEl.textContent = questions[current].question;
 
   questions[current].answers.forEach((answer, index) => {
     const btn = document.createElement("div");
-    btn.classList.add("answer");
-    btn.innerText = answer;
+    btn.className = "answer";
+    btn.textContent = answer;
     btn.onclick = () => selectAnswer(index);
     answersEl.appendChild(btn);
   });
 
+  updateProgressUI();
+
   timerInterval = setInterval(() => {
     timeLeft--;
-    timerEl.innerText = `⏱ ${timeLeft}`;
+    timerEl.textContent = `⏱ ${timeLeft}`;
 
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
@@ -91,84 +88,50 @@ function loadQuestion() {
 function selectAnswer(index) {
   clearInterval(timerInterval);
 
-  playSound(sClick);
-
-  const allAnswers = document.querySelectorAll(".answer");
   const correctIndex = questions[current].correct;
+  const allAnswers = document.querySelectorAll(".answer");
 
-  // блокуємо все і підсвічуємо вибір
   allAnswers.forEach((el, i) => {
     el.classList.add("disabled");
     if (i === index) el.classList.add("selected");
   });
 
-  // перевірка
-  const isCorrect = index === correctIndex;
+  if (index === correctIndex) {
+    score++;
+    streak++;
+    earnedXP += 100 + Math.min(50, streak * 5);
+  } else {
+    streak = 0;
+  }
 
-  if (isCorrect) {
-  score++;
-  streak++;
-
-  // XP: базово 100, + бонус за серію
-  const bonus = Math.min(50, streak * 5); // максимум +50
-  earnedXP += 100 + bonus;
-
-  playSound(sCorrect);
-  vibrate(60);
-} else {
-  streak = 0; // серія збивається
-  playSound(sWrong);
-  vibrate(120);
-  shake();
-}
-
-updateProgressUI();
-nextBtn.classList.remove("hidden");
-
+  updateProgressUI();
   nextBtn.classList.remove("hidden");
 }
+
 function disableAnswers() {
   document.querySelectorAll(".answer").forEach(el => {
     el.classList.add("disabled");
   });
 }
 
-// збережемо останній score та XP
-localStorage.setItem("lastScore", score);
-localStorage.setItem("lastXP", earnedXP);
+nextBtn.onclick = () => {
+  current++;
 
-// додамо XP до загального
-const totalXP = Number(localStorage.getItem("totalXP") || 0);
-localStorage.setItem("totalXP", totalXP + earnedXP);
+  if (current < questions.length) {
+    loadQuestion();
+  } else {
+    // ✅ ЗБЕРІГАЄМО РЕЗУЛЬТАТИ ТІЛЬКИ В КІНЦІ
+    localStorage.setItem("lastScore", score);
+    localStorage.setItem("lastXP", earnedXP);
 
-// рекорд по score
-const bestScore = Number(localStorage.getItem("bestScore") || 0);
-if (score > bestScore) localStorage.setItem("bestScore", score);
+    const totalXP = Number(localStorage.getItem("totalXP") || 0);
+    localStorage.setItem("totalXP", totalXP + earnedXP);
 
-// редірект на result або на головну (як хочеш)
-location.href = "result.html";
+    const bestScore = Number(localStorage.getItem("bestScore") || 0);
+    if (score > bestScore) localStorage.setItem("bestScore", score);
+
+    location.href = "result.html";
+  }
 };
 
-loadQuestion(); 
-updateProgressUI();
-
-
-let streak = 0;
-let earnedXP = 0;
-
-const progressText = document.getElementById("progressText");
-const progressFill = document.getElementById("progressFill");
-const streakText = document.getElementById("streakText");
-const xpText = document.getElementById("xpText");
-
-function updateProgressUI(){
-  const total = questions.length;
-  const currentNum = current + 1;
-
-  if (progressText) progressText.textContent = `Питання ${currentNum}/${total}`;
-  if (progressFill) progressFill.style.width = `${(currentNum / total) * 100}%`;
-
-  if (streakText) streakText.textContent = `🔥 Серія: ${streak}`;
-  if (xpText) xpText.textContent = `⚡ XP: ${earnedXP}`;
-}
-
+loadQuestion();
