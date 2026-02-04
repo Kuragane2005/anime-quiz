@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Складність — Anime Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <style>
+    .wrap{ width:min(980px,94%); margin: 16px auto 40px; }
+    .card{
+      background: rgba(15,15,25,.82);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      padding:18px;
+      box-shadow: 0 0 30px rgba(255,0,140,.18);
+      backdrop-filter: blur(10px);
+      text-align:center;
+    }
+    h1{ margin:0 0 8px; font-size:40px; letter-spacing:2px; }
+    p{ margin:0 0 16px; font-family: Arial, sans-serif; opacity:.85; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top: 14px;
+    }
+    .opt{
+      display:block;
+      padding:16px;
+      border-radius:18px;
+      text-decoration:none;
+      color:#fff;
+      font-family: Arial, sans-serif;
+      background: rgba(255,255,255,0.07);
+      border:1px solid rgba(255,255,255,0.10);
+      transition: transform .12s ease;
+    }
+    .opt:hover{ transform: scale(1.01); }
+    .name{ font-weight:800; font-size:16px; }
+    .hint{ opacity:.8; font-size:13px; margin-top:6px; }
+    .badge{
+      display:inline-block;
+      margin-top:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,0.10);
+      font-size:12px;
+    }
+    @media (max-width:560px){ .grid{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">🔥 ANIME HUB</a>
+    <nav class="nav">
+      <a class="active" href="difficulty.html">Тести</a>
+      <a href="openings.html">Опенінги</a>
+      <a href="leaders.html">Лідери</a>
+      <a href="ranks.html">Ранги</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h1>🎚 Обери складність</h1>
+      <p>Спочатку складність, потім обереш аніме</p>
+
+      <div class="grid">
+        <a class="opt" href="tests.html?diff=easy">
+          <div class="name">Easy</div>
+          <div class="hint">Легкі питання (для розігріву)</div>
+          <div class="badge">+100 XP</div>
+        </a>
+
+        <a class="opt" href="tests.html?diff=medium">
+          <div class="name">Medium</div>
+          <div class="hint">Середній рівень</div>
+          <div class="badge">+140 XP</div>
+        </a>
+
+        <a class="opt" href="tests.html?diff=hard">
+          <div class="name">Hard</div>
+          <div class="hint">Важко, але реально</div>
+          <div class="badge">+180 XP</div>
+        </a>
+
+        <a class="opt" href="tests.html?diff=impossible">
+          <div class="name">Impossible</div>
+          <div class="hint">Для монстрів 😈</div>
+          <div class="badge">+250 XP</div>
+        </a>
+      </div>
+
+      <div style="margin-top:16px;">
+        <a class="btn ghost" href="index.html">← На головну</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
