@@ -5,21 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Тести — Anime Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tests.css" />
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZ0N5MXX12"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SZ0N5MXX12');
-</script>
+  <link rel="stylesheet" href="base.css">
+  <style>
+    .wrap{ width:min(980px,94%); margin: 16px auto 40px; }
+    .card{
+      background: rgba(15,15,25,.82);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      padding:18px;
+      box-shadow: 0 0 30px rgba(255,0,140,.18);
+      backdrop-filter: blur(10px);
+    }
+    h1{ margin:0 0 8px; font-size:40px; letter-spacing:2px; }
+    p{ margin:0 0 14px; font-family: Arial, sans-serif; opacity:.85; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top: 12px;
+    }
+    .test{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:12px;
+      padding:14px;
+      border-radius:18px;
+      background: rgba(255,255,255,0.07);
+      border:1px solid rgba(255,255,255,0.10);
+      text-decoration:none;
+      color:#fff;
+      font-family: Arial, sans-serif;
+      transition: transform .12s ease;
+    }
+    .test:hover{ transform: scale(1.01); }
+    .tag{ opacity:.8; font-size:13px; }
+    .go{
+      padding:10px 12px;
+      border-radius:14px;
+      background: linear-gradient(90deg,#ff2f92,#7a3cff);
+      font-weight:700;
+      font-size:13px;
+    }
+    @media (max-width:560px){ .grid{ grid-template-columns:1fr; } }
+  </style>
 </head>
-<body class="page">
-
+<body>
   <header class="topbar">
-    <a class="tile primary" href="quiz.html">
     <a class="brand" href="index.html">🔥 ANIME HUB</a>
     <nav class="nav">
       <a class="active" href="tests.html">Тести</a>
@@ -31,57 +61,46 @@
 
   <main class="wrap">
     <section class="card">
-      <h1>🧠 Тести</h1>
-      <p class="subtitle">Обирай режим і набивай XP. Нові тести зʼявлятимуться тут.</p>
+      <h1>🧠 Тести (Easy)</h1>
+      <p>Обирай аніме і проходь легкий тест. (5 питань)</p>
 
       <div class="grid">
-        <!-- Готовий -->
-        <a class="tile primary" href="quiz.html">
-          <div class="tile-top">
-            <div class="tile-icon">⚡</div>
-            <div class="tile-title">Швидкий тест</div>
+        <a class="test" href="quiz.html?mode=naruto">
+          <div>
+            <b>Naruto</b><div class="tag">Easy • 5 питань</div>
           </div>
-          <div class="tile-desc">5 питань • таймер • результат в кінці</div>
+          <div class="go">Старт</div>
         </a>
 
-        <!-- Заглушки (скоро) -->
-        <a class="tile disabled" href="#" aria-disabled="true">
-          <div class="tile-top">
-            <div class="tile-icon">🔥</div>
-            <div class="tile-title">Складний тест</div>
+        <a class="test" href="quiz.html?mode=hunter">
+          <div>
+            <b>Hunter x Hunter</b><div class="tag">Easy • 5 питань</div>
           </div>
-          <div class="tile-desc">Скоро • 20 питань • без підказок</div>
-          <div class="badge">SOON</div>
+          <div class="go">Старт</div>
         </a>
 
-        <a class="tile disabled" href="#" aria-disabled="true">
-          <div class="tile-top">
-            <div class="tile-icon">🎭</div>
-            <div class="tile-title">Персонажі</div>
+        <a class="test" href="quiz.html?mode=bleach">
+          <div>
+            <b>Bleach</b><div class="tag">Easy • 5 питань</div>
           </div>
-          <div class="tile-desc">Скоро • хто це? з якого аніме?</div>
-          <div class="badge">SOON</div>
+          <div class="go">Старт</div>
         </a>
 
-        <a class="tile disabled" href="#" aria-disabled="true">
-          <div class="tile-top">
-            <div class="tile-icon">🖼️</div>
-            <div class="tile-title">По кадру</div>
+        <a class="test" href="quiz.html?mode=sao">
+          <div>
+            <b>Sword Art Online</b><div class="tag">Easy • 5 питань</div>
           </div>
-          <div class="tile-desc">Скоро • вгадай аніме по скріну</div>
-          <div class="badge">SOON</div>
+          <div class="go">Старт</div>
+        </a>
+
+        <a class="test" href="quiz.html?mode=mha">
+          <div>
+            <b>My Hero Academia</b><div class="tag">Easy • 5 питань</div>
+          </div>
+          <div class="go">Старт</div>
         </a>
       </div>
-
-      <div class="actions">
-        <a class="btn" href="quiz.html">▶ Почати швидкий тест</a>
-        <a class="btn ghost" href="index.html">← На головну</a>
-      </div>
-
-      <p class="hint">Порада: додай нові питання — і “Швидкий тест” стане топовим режимом 😈</p>
     </section>
   </main>
-
 </body>
 </html>
-
