@@ -1,33 +1,30 @@
-/* ===== Leaders page only ===== */
-
 :root{
-  --glass: rgba(15,15,25,.82);
-  --glass2: rgba(255,255,255,.07);
-  --line: rgba(255,255,255,.12);
-  --text: rgba(255,255,255,.88);
+  --glass: rgba(12,12,20,.78);
+  --glass2: rgba(255,255,255,.06);
+  --line: rgba(255,255,255,.10);
+  --text: rgba(255,255,255,.90);
   --muted: rgba(255,255,255,.72);
   --pink: #ff2f92;
   --vio: #7a3cff;
 }
 
-*{ box-sizing: border-box; }
+*{ box-sizing:border-box; }
 
 body{
   margin:0;
   min-height:100vh;
-  font-family: "Bangers", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:"Bangers", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color:#fff;
   overflow-x:hidden;
-  display:block !important; /* важливо: перебиває flex із base.css */
+  display:block !important;
   background:
     radial-gradient(circle at top, #2b145f 0%, transparent 40%),
     linear-gradient(135deg, #0b0b18, #140c2e, #0b0b18);
 }
 
-/* bg image + stars */
+/* background layers */
 .bg{
-  position:fixed;
-  inset:0;
+  position:fixed; inset:0;
   background: url("bg.jpg") center/cover no-repeat;
   opacity:.12;
   filter: blur(1px) saturate(1.1);
@@ -35,8 +32,7 @@ body{
   z-index:0;
 }
 .stars{
-  position:fixed;
-  inset:0;
+  position:fixed; inset:0;
   pointer-events:none;
   z-index:1;
   background-image: radial-gradient(#ffffff22 1px, transparent 1px);
@@ -48,31 +44,32 @@ body{
   to{ transform: translateY(-200px); }
 }
 
+/* page width like your screenshot (wide) */
 .page{
   position:relative;
   z-index:2;
-  width:min(1100px, 94%);
-  margin: 0 auto;
-  padding: 14px 0 40px;
+  width:min(1180px, 96%);
+  margin: 12px auto 36px;
 }
 
-/* ===== top nav card (як на твоєму скріні) ===== */
+/* ===== TOP NAV CARD (compact like screenshot) ===== */
 .topcard{
-  background: rgba(15,15,25,.70);
-  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(12,12,20,.55);
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 18px;
-  padding: 14px 16px;
-  box-shadow: 0 0 30px rgba(255, 0, 140, 0.18);
+  padding: 10px 14px 12px;
+  box-shadow: 0 0 26px rgba(255,0,140,.14);
   backdrop-filter: blur(10px);
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .topbrand{
   letter-spacing:2px;
-  font-size: 22px;
+  font-size: 14px;           /* менше, як на скріні */
+  opacity:.95;
 }
 
 .topnav{
@@ -87,13 +84,14 @@ body{
   text-decoration:none;
   color:#fff;
   opacity:.9;
-  padding:10px 14px;
+  padding:8px 14px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
   transition: transform .12s ease, opacity .12s ease, background .12s ease;
+  font-size: 13px;
 }
-.pill:hover{ opacity:1; transform: scale(1.02); background: rgba(255,255,255,0.10); }
+.pill:hover{ opacity:1; transform: scale(1.02); background: rgba(255,255,255,0.09); }
 .pill.active{
   background: linear-gradient(90deg, var(--pink), var(--vio));
   border-color: transparent;
@@ -102,43 +100,52 @@ body{
 
 .topsub{
   font-family: Arial, sans-serif;
-  font-size: 13px;
-  opacity: .75;
+  font-size: 11px;
+  opacity: .70;
 }
 
-/* ===== main card ===== */
+/* ===== MAIN CARD (more flat + wide like screenshot) ===== */
 .card{
-  margin-top: 14px;
+  margin-top: 12px;
   background: var(--glass);
-  border: 1px solid rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.10);
   border-radius: 22px;
-  padding: 18px 18px 16px;
-  box-shadow: 0 0 30px rgba(255, 0, 140, 0.18);
+  padding: 16px 16px 14px;
+  box-shadow: 0 0 28px rgba(255, 0, 140, 0.14);
   backdrop-filter: blur(10px);
 }
 
+/* header row like screenshot: title left, filters right */
 .head{
-  display:grid;
-  grid-template-columns: 56px 1fr auto;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
   gap: 12px;
-  align-items:start;
 }
 
 .hicon{
   font-size: 42px;
   line-height: 1;
-  margin-top: 4px;
+  margin-right: 10px;
+}
+
+.head > div:first-child{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
 }
 
 h1{
   margin:0;
-  font-size: 46px;
+  font-size: 44px;
   letter-spacing: 2px;
 }
+
 .head p{
   margin: 6px 0 0;
   font-family: Arial, sans-serif;
   color: var(--muted);
+  font-size: 13px;
 }
 
 .filters{
@@ -146,60 +153,59 @@ h1{
   gap:10px;
   justify-content:flex-end;
   flex-wrap:wrap;
+  margin-top: 6px;
 }
 .filters select{
   font-family: Arial, sans-serif;
   color:#fff;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
   border-radius: 12px;
-  padding: 10px 12px;
+  padding: 8px 10px;
   outline:none;
+  font-size: 12px;
 }
 
-/* ===== top3 podium ===== */
+/* ===== TOP 3 PODIUM (exact vibe: 3 flat cards) ===== */
 .top3{
-  margin-top: 14px;
+  margin-top: 12px;
   display:grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
 .podium{
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
   padding: 12px;
-  position:relative;
-  overflow:hidden;
 }
 
 .place{
   font-family: Arial, sans-serif;
-  font-size: 12px;
-  opacity:.85;
+  font-size: 11px;
+  opacity:.80;
   margin-bottom: 10px;
 }
 
 .avatar{
-  width: 58px;
-  height: 58px;
-  border-radius: 16px;
-  margin: 0 auto 10px;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  margin: 0 auto 8px;
   display:flex;
   align-items:center;
   justify-content:center;
   font-family: Arial, sans-serif;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 1px;
   background: linear-gradient(135deg, var(--pink), var(--vio));
-  box-shadow: 0 0 18px rgba(255, 0, 140, 0.25);
+  box-shadow: 0 0 14px rgba(255,0,140,0.22);
 }
 
 .nick{
   text-align:center;
-  font-family: "Bangers", system-ui;
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 1px;
   margin-bottom: 6px;
   opacity:.95;
@@ -211,51 +217,54 @@ h1{
   align-items:center;
   gap: 8px;
   font-family: Arial, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text);
   opacity:.95;
 }
-
 .badge{
   display:inline-flex;
   align-items:center;
   gap: 6px;
-  padding: 6px 10px;
+  padding: 6px 9px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* ===== table ===== */
+/* ===== TABLE (more like screenshot: flat, clear grid) ===== */
 .table{
-  margin-top: 14px;
-  border-radius: 18px;
+  margin-top: 12px;
+  border-radius: 16px;
   overflow:hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.035);
 }
 
 .thead, .row{
   display:grid;
-  grid-template-columns: 46px 1.6fr 0.8fr 0.8fr 0.8fr 0.6fr;
+  grid-template-columns: 44px 1.6fr 0.8fr 0.7fr 0.7fr 0.55fr;
   gap: 10px;
   align-items:center;
 }
 
 .thead{
-  padding: 12px 14px;
+  padding: 10px 12px;
   font-family: Arial, sans-serif;
-  font-size: 12px;
-  opacity:.85;
-  border-bottom: 1px solid rgba(255,255,255,0.10);
+  font-size: 11px;
+  opacity:.82;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .tbody .row{
-  padding: 12px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   font-family: Arial, sans-serif;
+  font-size: 12px;
 }
 .tbody .row:last-child{ border-bottom: none; }
+.tbody .row:hover{
+  background: rgba(255,255,255,0.03);
+}
 
 .player{
   display:flex;
@@ -263,41 +272,35 @@ h1{
   gap: 10px;
   min-width: 0;
 }
-
 .pfp{
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 12px;
   background: rgba(255,255,255,0.10);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 1px;
 }
-
 .pname{
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
-
 .right{ text-align:right; }
 
-.rankchip{
-  display:inline-flex;
-  justify-content:flex-end;
-  gap: 6px;
-  align-items:center;
-}
 .rankchip .rbadge{
-  padding: 5px 10px;
+  display:inline-flex;
+  gap:6px;
+  align-items:center;
+  padding: 5px 9px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* ===== buttons ===== */
+/* ===== BUTTONS layout like screenshot (two rows, same height) ===== */
 .btn{
   display:block;
   width:100%;
@@ -305,8 +308,8 @@ h1{
   cursor:pointer;
   text-decoration:none;
   text-align:center;
-  padding: 14px 14px;
-  border-radius: 16px;
+  padding: 12px 12px;
+  border-radius: 14px;
   color:#fff;
   font-family: Arial, sans-serif;
   background: linear-gradient(90deg, var(--pink), var(--vio));
@@ -315,41 +318,33 @@ h1{
 .btn:hover{ transform: scale(1.01); filter: brightness(1.05); }
 
 .btn.ghost{
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.10);
 }
 
-.actions{
+/* row 1: demo/clear, row 2: home/tests */
+.actions, .footer{
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-top: 14px;
-}
-
-.footer{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 .hint{
-  margin-top: 12px;
+  margin-top: 10px;
   font-family: Arial, sans-serif;
-  font-size: 13px;
-  opacity: .85;
+  font-size: 12px;
+  opacity: .82;
   text-align:center;
 }
 
-/* ===== mobile ===== */
-@media (max-width: 800px){
+/* ===== responsive ===== */
+@media (max-width: 860px){
   .head{
-    grid-template-columns: 46px 1fr;
+    flex-direction:column;
+    align-items:flex-start;
   }
-  .filters{
-    grid-column: 1 / -1;
-    justify-content:flex-start;
-  }
+  .filters{ justify-content:flex-start; }
 }
 
 @media (max-width: 700px){
@@ -357,10 +352,10 @@ h1{
   h1{ font-size: 38px; }
 
   .thead, .row{
-    grid-template-columns: 36px 1.2fr 0.8fr 0.8fr;
+    grid-template-columns: 36px 1.25fr 0.75fr 0.7fr;
   }
 
-  /* ховаємо Тести і W на телефоні, щоб не ламалося */
+  /* hide tests + W on phones like before */
   .thead > div:nth-child(5),
   .thead > div:nth-child(6),
   .row  > div:nth-child(5),
