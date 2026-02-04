@@ -81,3 +81,28 @@ a{ color: inherit; }
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: none;
 }
+.topbar{
+  width: min(980px, 94%);
+  margin: 14px auto 0;
+  padding: 12px 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  position: relative;
+  z-index: 2;
+}
+
+.brand{
+  text-decoration:none;
+  color:#fff;
+  letter-spacing: 2px;
+  font-size: 26px;
+}
+
+.nav{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
