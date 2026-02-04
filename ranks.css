@@ -1,4 +1,6 @@
-/* ranks.css */
+/* ================= RANKS PAGE (STANDALONE) ================= */
+
+* { box-sizing: border-box; }
 
 body.page-ranks{
   margin:0;
@@ -13,6 +15,7 @@ body.page-ranks{
     linear-gradient(135deg, #070812, #120a2a, #070812);
 }
 
+/* bg overlays */
 body.page-ranks::after{
   content:"";
   position:fixed;
@@ -33,72 +36,118 @@ body.page-ranks::before{
   z-index:1;
 }
 
+/* HEADER */
+.rank-header{
+  position:relative;
+  z-index:2;
+  width:min(980px, 94%);
+  margin: 14px auto 0;
+  padding: 16px 14px;
+  border-radius: 22px;
+  background: rgba(15, 15, 25, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  text-align:center;
+}
+
+.logo{
+  display:block;
+  text-decoration:none;
+  color:#fff;
+  font-size:26px;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.rank-nav{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.rank-nav a{
+  font-family: Arial, sans-serif;
+  text-decoration:none;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  opacity:.9;
+}
+.rank-nav a.active{
+  background: linear-gradient(90deg, #ff2f92, #7a3cff);
+  border:0;
+  opacity:1;
+}
+
+/* CONTENT */
 .wrap{
   position:relative;
   z-index:2;
   width:min(980px, 94%);
-  margin: 16px auto 44px;
+  margin: 18px auto 40px;
 }
 
-/* card */
 .rank-card{
-  width:min(760px, 100%);
+  width:min(720px, 100%);
   margin: 0 auto;
-  padding: 22px;
+  padding: 24px 22px;
   border-radius: 22px;
   background: rgba(15, 15, 25, 0.82);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 0 30px rgba(255, 0, 140, 0.20);
+  box-shadow: 0 0 30px rgba(255, 0, 140, 0.22);
   text-align:center;
 }
 
 .rank-card h1{
-  margin: 0 0 10px;
-  font-size: 42px;
+  margin:0 0 8px;
+  font-size:42px;
   letter-spacing:2px;
 }
 
 .sub{
-  margin: 0 0 16px;
+  margin:0 0 18px;
   font-family: Arial, sans-serif;
   opacity:.85;
-  font-size: 14px;
+  font-size:14px;
 }
 
 /* boxes */
 .grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 14px 0 14px;
+  gap:12px;
+  margin-bottom:14px;
 }
 
 .box{
-  padding: 14px;
-  border-radius: 18px;
+  padding:14px;
+  border-radius:18px;
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.10);
   text-align:left;
   font-family: Arial, sans-serif;
 }
 .label{
+  font-size:13px;
   opacity:.85;
-  font-size: 13px;
 }
 .value{
-  margin-top: 6px;
-  font-size: 30px;
-  font-weight: 800;
+  margin-top:6px;
+  font-size:30px;
+  font-weight:800;
 }
 
 /* progress */
 .progress{
-  margin-top: 12px;
-  padding: 14px;
-  border-radius: 18px;
+  margin-top:10px;
+  padding:14px;
+  border-radius:18px;
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.10);
   font-family: Arial, sans-serif;
   text-align:left;
 }
@@ -106,39 +155,28 @@ body.page-ranks::before{
 .progress-top{
   display:flex;
   justify-content:space-between;
-  gap: 10px;
-  font-size: 13px;
+  font-size:13px;
   opacity:.9;
-  margin-bottom: 10px;
+  margin-bottom:8px;
 }
 
 .bar{
-  height: 12px;
-  width: 100%;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.10);
+  height:12px;
+  border-radius:999px;
+  background: rgba(255,255,255,0.12);
   overflow:hidden;
 }
 .fill{
-  height: 100%;
-  width: 35%;
-  border-radius: 999px;
+  height:100%;
   background: linear-gradient(90deg, #ff2f92, #7a3cff);
-  transition: width .3s ease;
-}
-
-.hint{
-  margin-top: 10px;
-  font-size: 13px;
-  opacity:.85;
 }
 
 /* buttons */
 .actions{
+  margin-top:16px;
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 16px;
+  gap:12px;
 }
 
 .btn{
@@ -146,19 +184,19 @@ body.page-ranks::before{
   text-decoration:none;
   color:#fff;
   text-align:center;
-  padding: 14px 14px;
-  border-radius: 16px;
+  padding:14px;
+  border-radius:16px;
   font-family: Arial, sans-serif;
   background: linear-gradient(90deg, #ff2f92, #7a3cff);
-  border: 0;
 }
 .btn.ghost{
   background: rgba(255,255,255,0.08);
   border:1px solid rgba(255,255,255,0.12);
 }
 
-@media (max-width: 520px){
-  .rank-card h1{ font-size: 34px; }
-  .grid{ grid-template-columns: 1fr; }
-  .actions{ grid-template-columns: 1fr; }
+/* mobile */
+@media (max-width:520px){
+  .rank-card h1{ font-size:34px; }
+  .grid{ grid-template-columns:1fr; }
+  .actions{ grid-template-columns:1fr; }
 }
