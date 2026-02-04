@@ -133,15 +133,20 @@ function disableAnswers() {
   });
 }
 
-nextBtn.onclick = () => {
-  current++;
+// збережемо останній score та XP
+localStorage.setItem("lastScore", score);
+localStorage.setItem("lastXP", earnedXP);
 
-  if (current < questions.length) {
-    loadQuestion();
-  } else {
-    localStorage.setItem("score", score);
-    location.href = "./index.html";
-  }
+// додамо XP до загального
+const totalXP = Number(localStorage.getItem("totalXP") || 0);
+localStorage.setItem("totalXP", totalXP + earnedXP);
+
+// рекорд по score
+const bestScore = Number(localStorage.getItem("bestScore") || 0);
+if (score > bestScore) localStorage.setItem("bestScore", score);
+
+// редірект на result або на головну (як хочеш)
+location.href = "result.html";
 };
 
 loadQuestion(); 
@@ -166,3 +171,4 @@ function updateProgressUI(){
   if (streakText) streakText.textContent = `🔥 Серія: ${streak}`;
   if (xpText) xpText.textContent = `⚡ XP: ${earnedXP}`;
 }
+
