@@ -2,7 +2,6 @@
 body{
   display:block;
 }
-
 .topbar{
   width: min(980px, 94%);
   margin: 14px auto 0;
@@ -28,6 +27,7 @@ body{
   flex-wrap:wrap;
   justify-content:flex-end;
 }
+
 
 .nav a{
   text-decoration:none;
