@@ -48,6 +48,21 @@
     @media (max-width:560px){ .grid{ grid-template-columns:1fr; } }
   </style>
 </head>
+  <script>
+  const params = new URLSearchParams(location.search);
+  const diff = params.get("diff") || "easy";
+
+  // міняємо заголовок
+  const h1 = document.querySelector("h1");
+  if (h1) h1.textContent = `🧠 Тести (${diff.toUpperCase()})`;
+
+  // додаємо diff до всіх кнопок старту
+  document.querySelectorAll('a[href^="quiz.html"]').forEach(a => {
+    const url = new URL(a.href);
+    url.searchParams.set("diff", diff);
+    a.href = url.pathname + "?" + url.searchParams.toString();
+  });
+  </script>
 <body>
   <header class="topbar">
     <a class="brand" href="index.html">🔥 ANIME HUB</a>
