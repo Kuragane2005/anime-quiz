@@ -4,44 +4,55 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Лідери — Anime Hub</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+  <!-- якщо в тебе є base.css — залишай -->
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="leaders.css">
 </head>
 
 <body>
-  <header class="topbar">
-    <a class="brand" href="index.html">🔥 ANIME HUB</a>
-    <nav class="nav">
-      <a href="tests.html">Тести</a>
-      <a href="openings.html">Опенінги</a>
-      <a class="active" href="leaders.html">Лідери</a>
-      <a href="ranks.html">Ранги</a>
-    </nav>
-  </header>
+  <div class="bg"></div>
+  <div class="stars"></div>
 
   <main class="page">
+    <!-- TOP NAV CARD (як на скріні) -->
+    <header class="topcard">
+      <div class="topbrand">🔥 ANIME HUB</div>
+
+      <nav class="topnav">
+        <a class="pill" href="tests.html">Тести</a>
+        <a class="pill" href="openings.html">Опенінги</a>
+        <a class="pill active" href="leaders.html">Лідери</a>
+        <a class="pill" href="ranks.html">Ранги</a>
+      </nav>
+
+      <div class="topsub">Топ гравців за XP — скоро буде онлайн-таблиця</div>
+    </header>
+
+    <!-- MAIN CARD -->
     <section class="card">
-      <div class="title">
-        <div class="icon">🏆</div>
+      <div class="head">
+        <div class="hicon">🏆</div>
         <div>
           <h1>Таблиця лідерів</h1>
           <p>Топ гравців за XP і результатами тестів</p>
         </div>
-      </div>
 
-      <div class="filters">
-        <select id="period">
-          <option value="all">За весь час</option>
-          <option value="week">За тиждень</option>
-          <option value="day">За день</option>
-        </select>
+        <div class="filters">
+          <select id="period">
+            <option value="all">За весь час</option>
+            <option value="14">Останні 14 днів (демо)</option>
+            <option value="7">Останні 7 днів (демо)</option>
+          </select>
 
-        <select id="sort">
-          <option value="xp">Сортувати: XP</option>
-          <option value="tests">Сортувати: Тести</option>
-          <option value="wins">Сортувати: Рекорд</option>
-        </select>
+          <select id="sort">
+            <option value="xp">Сортувати: XP</option>
+            <option value="wins">Сортувати: W</option>
+            <option value="tests">Сортувати: Тести</option>
+          </select>
+        </div>
       </div>
 
       <!-- TOP 3 -->
@@ -57,15 +68,22 @@
           <div class="right">Тести</div>
           <div class="right">W</div>
         </div>
-        <div id="list" class="tbody"></div>
+        <div id="rows" class="tbody"></div>
       </div>
 
+      <!-- ACTIONS -->
+      <div class="actions">
+        <button id="demoBtn" class="btn ghost">Заповнити демо</button>
+        <button id="clearBtn" class="btn">Очистити</button>
+      </div>
+
+      <!-- FOOTER BUTTONS -->
       <div class="footer">
-        <a class="btn ghost" href="./index.html">← На головну</a>
+        <a class="btn ghost" href="index.html">← На головну</a>
         <a class="btn" href="tests.html">▶ Грати тести</a>
       </div>
 
-      <p class="hint">Порада: за 1 тест ти отримуєш XP. Чим більше серія — тим вищий ранг 😈</p>
+      <div class="hint">Порада: за 1 тест ти отримуєш XP. Чим більше серія — тим вищий ранг 😈</div>
     </section>
   </main>
 
