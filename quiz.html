@@ -1,47 +1,74 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime Quiz</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZ0N5MXX12"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SZ0N5MXX12');
-</script>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <div id="quizTitle" style="text-align:center; font-size:18px; margin-bottom:10px; opacity:.9;"></div>
-  <div class="quiz-top">
-  <div id="progressText" class="progress-text">Питання 1/10</div>
-  <div class="progress-bar">
-    <div id="progressFill" class="progress-fill"></div>
-  </div>
-
-  <div class="mini-stats">
-    <span id="streakText">🔥 Серія: 0</span>
-    <span id="xpText">⚡ XP: 0</span>
-  </div>
-  </div>
   <div class="container">
-    <p id="timer">⏱ 10</p>
-    <h2 id="question"></h2>
-    <div id="answers"></div>
-    <button id="nextBtn" class="btn hidden">Далі</button>
-  </div>
-<audio id="sCorrect" src="correct.mp3" preload="auto"></audio>
-<audio id="sWrong" src="wrong.mp3" preload="auto"></audio>
 
-  <script src="script.js"></script>
+    <!-- SCREEN: SELECT MODE -->
+    <div id="screenSelect" class="fade-in">
+      <h1>ANIME QUIZ</h1>
+      <p style="font-family: Arial, sans-serif; opacity:.9; margin-top:-6px;">
+        Обери складність і аніме 👇
+      </p>
+
+      <h2 style="font-size:22px; margin-top:18px;">Складність</h2>
+      <div class="grid" style="margin-top:10px;">
+        <button class="answer" data-diff="easy">🟢 Легкий</button>
+        <button class="answer" data-diff="medium">🟡 Середній</button>
+        <button class="answer" data-diff="hard">🟠 Складний</button>
+        <button class="answer" data-diff="impossible">🔴 Неможливо</button>
+      </div>
+
+      <h2 style="font-size:22px; margin-top:18px;">Аніме</h2>
+      <div class="grid" style="margin-top:10px;">
+        <button class="answer" data-anime="naruto">🍥 Naruto</button>
+        <button class="answer" data-anime="hxh">⚡ Hunter x Hunter</button>
+        <button class="answer" data-anime="bleach">🗡 Bleach</button>
+        <button class="answer" data-anime="sao">🕹 SAO</button>
+        <button class="answer" data-anime="mha">💥 MHA</button>
+      </div>
+
+      <button id="startBtn" class="btn" style="margin-top:18px;" disabled>▶ Почати</button>
+      <a class="btn ghost" href="./index.html" style="margin-top:12px; text-align:center;">← На головну</a>
+    </div>
+
+    <!-- SCREEN: QUIZ -->
+    <div id="screenQuiz" class="hidden fade-in">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px;">
+        <div id="progressText" style="font-family:Arial,sans-serif; font-size:13px; opacity:.9;">Питання 1/10</div>
+        <div id="timer">⏱ 10</div>
+      </div>
+
+      <div class="progress-bar" style="margin-bottom:12px;">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; gap:10px; font-family:Arial,sans-serif; font-size:13px; opacity:.9; margin-bottom:10px;">
+        <div id="streakText">🔥 Серія: 0</div>
+        <div id="xpText">⚡ XP: 0</div>
+      </div>
+
+      <h2 id="question" style="margin-top:6px;">Питання</h2>
+      <div id="answers"></div>
+
+      <button id="nextBtn" class="btn hidden">Далі</button>
+      <a class="btn ghost" href="./index.html" style="margin-top:12px; text-align:center;">← На головну</a>
+
+      <!-- sounds (якщо нема файлів — просто не заважає) -->
+      <audio id="sClick" src="click.mp3" preload="auto"></audio>
+      <audio id="sCorrect" src="correct.mp3" preload="auto"></audio>
+      <audio id="sWrong" src="wrong.mp3" preload="auto"></audio>
+    </div>
+
+  </div>
+
+  <script src="quiz.js"></script>
 </body>
 </html>
-
-
-
-
-
