@@ -130,8 +130,9 @@ nextBtn.onclick = () => {
     loadQuestion();
   } else {
     localStorage.setItem("score", score);
-    window.location.href = "result.html";
+    location.href = "./index.html";
   }
 };
 
 loadQuestion();
+
