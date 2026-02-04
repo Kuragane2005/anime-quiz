@@ -1,4 +1,6 @@
-// ===== 5 Easy quizzes =====
+const params = new URLSearchParams(location.search);
+const mode = params.get("mode") || "naruto";
+const diff = params.get("diff") || "easy";// ===== 5 Easy quizzes =====
 const QUIZZES = {
   naruto: {
     title: "Naruto (Easy)",
@@ -167,3 +169,4 @@ nextBtn.onclick = () => {
 };
 
 loadQuestion();
+
