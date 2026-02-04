@@ -3,74 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anime Hub</title>
+  <title>Лідери — Anime Hub</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="base.css?v=1" />
-<link rel="stylesheet" href="home.css?v=1" />
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZ0N5MXX12"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SZ0N5MXX12');
-</script>
+  <link rel="stylesheet" href="leaders.css" />
 </head>
-<body class="home">
+<body>
 
-  <header class="topbar">
-    <a class="brand" href="index.html">🔥 ANIME HUB</a>
-    <nav class="nav">
-      <a href="tests.html">Тести</a>
-      <a href="openings.html">Опенінги</a>
-      <a href="leaders.html">Лідери</a>
-      <a href="ranks.html">Ранги</a>
+  <!-- Header card (centered like you wanted) -->
+  <header class="hub-header">
+    <div class="hub-brand">🔥 <span>ANIME HUB</span></div>
+
+    <nav class="hub-nav">
+      <a class="hub-link" href="tests.html">Тести</a>
+      <a class="hub-link" href="openings.html">Опенінги</a>
+      <a class="hub-link active" href="leaders.html">Лідери</a>
+      <a class="hub-link" href="ranks.html">Ранги</a>
     </nav>
+
+    <div class="hub-sub">Топ гравців за XP — скоро буде онлайн-таблиця</div>
   </header>
 
-  <main class="home-wrap">
-    <section class="hero">
-      <div class="hero-card">
-
-        <h1>🔥 ANIME HUB 🔥</h1>
-        <p class="subtitle">
-          Обирай режим, заробляй XP і піднімай свій ранг
-        </p>
-
-        <div class="mode-grid">
-          <a class="mode" href="tests.html">🧠 Тести</a>
-          <a class="mode" href="openings.html">🎵 Вгадай по опенінгу</a>
-          <a class="mode" href="leaderboard.html">🏆 Таблиця лідерів</a>
-          <a class="mode" href="ranks.html">📈 Ранги</a>
+  <main class="wrap">
+    <section class="card">
+      <div class="card-title">
+        <div class="title-left">
+          <div class="emoji">🏆</div>
+          <div>
+            <h1>Таблиця лідерів</h1>
+            <p>Поки що це демо-дані. Потім підключимо реальні результати.</p>
+          </div>
         </div>
 
-        <div class="cta-row">
-          <a class="cta" href="quiz.html">▶ Почати швидкий тест</a>
-          <a class="cta ghost" href="ranks.html">⭐ Мій ранг</a>
+        <div class="filters">
+          <select id="period">
+            <option value="all">За весь час</option>
+            <option value="week">За тиждень</option>
+            <option value="day">За день</option>
+          </select>
+
+          <select id="sort">
+            <option value="xp">Сортувати: XP</option>
+            <option value="wins">Сортувати: Перемоги</option>
+            <option value="tests">Сортувати: Тести</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="top3" id="top3"></div>
+
+      <div class="table">
+        <div class="t-head">
+          <div>#</div>
+          <div>Гравець</div>
+          <div class="right">Ранг</div>
+          <div class="right">XP</div>
+          <div class="right">Тести</div>
+          <div class="right">W</div>
         </div>
 
-        <p class="hint">
-          Порада: проходь тести щодня — прокачаєшся швидше 😈
-        </p>
+        <div class="t-body" id="list"></div>
+      </div>
 
+      <div class="actions">
+        <a class="btn ghost" href="index.html">← На головну</a>
+        <a class="btn" href="tests.html">▶ Грати тести</a>
+      </div>
+
+      <div class="hint">
+        Порада: за 1 тест ти отримуєш XP. Чим більше серія — тим вищий ранг 😈
       </div>
     </section>
   </main>
 
+  <script src="leaders.js"></script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
