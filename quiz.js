@@ -106,14 +106,24 @@ function selectAnswer(index) {
   const isCorrect = index === correctIndex;
 
   if (isCorrect) {
-    score++;
-    playSound(sCorrect);
-    vibrate(60);
-  } else {
-    playSound(sWrong);
-    vibrate(120);
-    shake();
-  }
+  score++;
+  streak++;
+
+  // XP: базово 100, + бонус за серію
+  const bonus = Math.min(50, streak * 5); // максимум +50
+  earnedXP += 100 + bonus;
+
+  playSound(sCorrect);
+  vibrate(60);
+} else {
+  streak = 0; // серія збивається
+  playSound(sWrong);
+  vibrate(120);
+  shake();
+}
+
+updateProgressUI();
+nextBtn.classList.remove("hidden");
 
   nextBtn.classList.remove("hidden");
 }
@@ -134,5 +144,25 @@ nextBtn.onclick = () => {
   }
 };
 
-loadQuestion();
+loadQuestion(); 
+updateProgressUI();
 
+
+let streak = 0;
+let earnedXP = 0;
+
+const progressText = document.getElementById("progressText");
+const progressFill = document.getElementById("progressFill");
+const streakText = document.getElementById("streakText");
+const xpText = document.getElementById("xpText");
+
+function updateProgressUI(){
+  const total = questions.length;
+  const currentNum = current + 1;
+
+  if (progressText) progressText.textContent = `Питання ${currentNum}/${total}`;
+  if (progressFill) progressFill.style.width = `${(currentNum / total) * 100}%`;
+
+  if (streakText) streakText.textContent = `🔥 Серія: ${streak}`;
+  if (xpText) xpText.textContent = `⚡ XP: ${earnedXP}`;
+}
