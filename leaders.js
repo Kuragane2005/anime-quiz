@@ -1,118 +1,97 @@
-// ===== LocalStorage keys =====
-const KEY_LEADERS = "animehub_leaders";
-const KEY_ME = "animehub_me"; // { name: "Bogdan", xp: 120, best: 4 }
+const rankFromXP = (xp) => {
+  if (xp >= 5000) return { name: "S+", badge: "👑" };
+  if (xp >= 3000) return { name: "S",  badge: "🔥" };
+  if (xp >= 2000) return { name: "A",  badge: "⚡" };
+  if (xp >= 1200) return { name: "B",  badge: "🗡️" };
+  if (xp >= 600)  return { name: "C",  badge: "⭐" };
+  return { name: "D", badge: "🌱" };
+};
 
-function loadLeaders() {
-  try {
-    return JSON.parse(localStorage.getItem(KEY_LEADERS)) || [];
-  } catch {
-    return [];
-  }
-}
-function saveLeaders(list) {
-  localStorage.setItem(KEY_LEADERS, JSON.stringify(list));
-}
+// demo data (потім замінимо на real)
+let players = [
+  { nick: "Kuragane", xp: 2680, tests: 34, wins: 22 },
+  { nick: "Senku",   xp: 5120, tests: 61, wins: 44 },
+  { nick: "Gojo",    xp: 3920, tests: 49, wins: 33 },
+  { nick: "Itachi",  xp: 1840, tests: 28, wins: 16 },
+  { nick: "Levi",    xp: 2310, tests: 31, wins: 21 },
+  { nick: "Saitama", xp: 980,  tests: 17, wins: 9  },
+  { nick: "Luffy",   xp: 1450, tests: 23, wins: 12 },
+  { nick: "Killua",  xp: 880,  tests: 14, wins: 8  },
+  { nick: "Aizen",   xp: 2700, tests: 33, wins: 20 },
+  { nick: "Naruto",  xp: 1580, tests: 25, wins: 14 },
+];
 
-function loadMe() {
-  try {
-    return JSON.parse(localStorage.getItem(KEY_ME)) || null;
-  } catch {
-    return null;
-  }
-}
+const makeInitials = (nick) => {
+  return (nick || "?").trim().slice(0,2).toUpperCase();
+};
 
-function setMeFallback() {
-  // якщо нік не збережений — зробимо базовий
-  if (!localStorage.getItem(KEY_ME)) {
-    localStorage.setItem(KEY_ME, JSON.stringify({ name: "Player", xp: 0, best: 0 }));
-  }
-}
+const sortPlayers = () => {
+  const sort = document.getElementById("sort").value;
+  players.sort((a,b) => (b[sort] - a[sort]) || (b.xp - a.xp));
+};
 
-function render() {
-  setMeFallback();
+const renderTop3 = () => {
+  const top3 = document.getElementById("top3");
+  top3.innerHTML = "";
 
-  const me = loadMe();
-  const leaders = loadLeaders()
-    .slice()
-    .sort((a, b) => (b.xp - a.xp) || (b.best - a.best));
+  const best = players.slice(0,3);
+  const places = ["🥇 1 місце", "🥈 2 місце", "🥉 3 місце"];
 
-  // stats
-  document.getElementById("countPlayers").textContent = leaders.length;
-  document.getElementById("meName").textContent = me?.name || "—";
-  document.getElementById("meXp").textContent = me?.xp ?? 0;
-
-  const rows = document.getElementById("rows");
-  rows.innerHTML = "";
-
-  const top = leaders.slice(0, 10);
-  if (top.length === 0) {
-    rows.innerHTML = `
-      <div class="row">
-        <div>—</div>
-        <div class="badge"><b>Поки пусто</b> <span class="pill">зроби перший результат</span></div>
-        <div class="right">0</div>
-        <div class="right">0</div>
+  best.forEach((p, i) => {
+    const r = rankFromXP(p.xp);
+    const el = document.createElement("div");
+    el.className = "podium";
+    el.innerHTML = `
+      <div class="place">${places[i]}</div>
+      <div class="avatar">${makeInitials(p.nick)}</div>
+      <div class="nick">${p.nick}</div>
+      <div class="meta">
+        <div class="badge">${r.badge} ${r.name}</div>
+        <div class="badge">XP: ${p.xp}</div>
       </div>
     `;
-    return;
-  }
-
-  top.forEach((p, idx) => {
-    const isMe = me && p.id && me.id && p.id === me.id;
-    const row = document.createElement("div");
-    row.className = "row" + (isMe ? " me" : "");
-
-    row.innerHTML = `
-      <div><b>${idx + 1}</b></div>
-      <div class="badge">
-        <b>${escapeHtml(p.name || "Player")}</b>
-        ${isMe ? `<span class="pill">Ти</span>` : ``}
-      </div>
-      <div class="right">${p.xp ?? 0}</div>
-      <div class="right">${p.best ?? 0}</div>
-    `;
-    rows.appendChild(row);
+    top3.appendChild(el);
   });
-}
+};
 
-// basic escape to avoid html injection
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, s => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[s]));
-}
+const renderList = () => {
+  const list = document.getElementById("list");
+  list.innerHTML = "";
 
-// demo fill
-function fillDemo() {
-  const demo = [
-    { id:"u1", name:"Kuragane", xp: 520, best: 5 },
-    { id:"u2", name:"SasukeFan", xp: 410, best: 4 },
-    { id:"u3", name:"Zoro", xp: 380, best: 4 },
-    { id:"u4", name:"Mikasa", xp: 330, best: 3 },
-    { id:"u5", name:"Gojo", xp: 300, best: 3 },
-    { id:"u6", name:"Luffy", xp: 260, best: 3 },
-    { id:"u7", name:"Senku", xp: 240, best: 3 },
-    { id:"u8", name:"Itachi", xp: 220, best: 2 },
-    { id:"u9", name:"Kakashi", xp: 200, best: 2 },
-    { id:"u10", name:"Zenitsu", xp: 180, best: 2 },
-  ];
-  saveLeaders(demo);
+  players.forEach((p, idx) => {
+    const r = rankFromXP(p.xp);
 
-  // зробимо “твій профіль”
-  const me = { id:"me", name:"Player", xp: 120, best: 2 };
-  localStorage.setItem(KEY_ME, JSON.stringify(me));
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = `
+      <div>${idx+1}</div>
 
-  render();
-}
+      <div class="player">
+        <div class="pfp">${makeInitials(p.nick)}</div>
+        <div class="name">${p.nick}</div>
+      </div>
 
-function clearAll() {
-  localStorage.removeItem(KEY_LEADERS);
-  // me можна залишити, але краще теж скинути
-  localStorage.removeItem(KEY_ME);
-  render();
-}
+      <div class="right rank">
+        <span class="rbadge">${r.badge}</span>
+        <span class="rname">${r.name}</span>
+      </div>
 
-document.getElementById("demoBtn").addEventListener("click", fillDemo);
-document.getElementById("clearBtn").addEventListener("click", clearAll);
+      <div class="right">${p.xp}</div>
+      <div class="right">${p.tests}</div>
+      <div class="right">${p.wins}</div>
+    `;
+    list.appendChild(row);
+  });
+};
 
-render();
+const rerender = () => {
+  sortPlayers();
+  renderTop3();
+  renderList();
+};
+
+// period — поки просто фейк (пізніше справжня логіка)
+document.getElementById("period").addEventListener("change", () => rerender());
+document.getElementById("sort").addEventListener("change", () => rerender());
+
+rerender();
