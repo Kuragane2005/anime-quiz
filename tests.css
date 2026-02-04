@@ -252,4 +252,34 @@ h1{
 .tile.primary:hover{
   box-shadow: 0 0 25px rgba(255, 60, 160, 0.35);
 }
-
+.quiz-top { margin-bottom: 12px; }
+.progress-text{
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  opacity: .9;
+  margin-bottom: 8px;
+}
+.progress-bar{
+  width:100%;
+  height:10px;
+  border-radius:999px;
+  background: rgba(255,255,255,0.10);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.10);
+}
+.progress-fill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background: linear-gradient(90deg, #ff2f92, #7a3cff);
+  transition: width .25s ease;
+}
+.mini-stats{
+  margin-top:10px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  opacity:.9;
+}
