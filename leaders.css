@@ -1,190 +1,366 @@
-/* ===== LEADERS PAGE ===== */
+/* ===== Leaders page only ===== */
 
-.page {
-  width: min(980px, 94%);
+:root{
+  --glass: rgba(15,15,25,.82);
+  --glass2: rgba(255,255,255,.07);
+  --line: rgba(255,255,255,.12);
+  --text: rgba(255,255,255,.88);
+  --muted: rgba(255,255,255,.72);
+  --pink: #ff2f92;
+  --vio: #7a3cff;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family: "Bangers", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:#fff;
+  overflow-x:hidden;
+  display:block !important; /* важливо: перебиває flex із base.css */
+  background:
+    radial-gradient(circle at top, #2b145f 0%, transparent 40%),
+    linear-gradient(135deg, #0b0b18, #140c2e, #0b0b18);
+}
+
+/* bg image + stars */
+.bg{
+  position:fixed;
+  inset:0;
+  background: url("bg.jpg") center/cover no-repeat;
+  opacity:.12;
+  filter: blur(1px) saturate(1.1);
+  pointer-events:none;
+  z-index:0;
+}
+.stars{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  background-image: radial-gradient(#ffffff22 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: starsMove 60s linear infinite;
+}
+@keyframes starsMove{
+  from{ transform: translateY(0); }
+  to{ transform: translateY(-200px); }
+}
+
+.page{
+  position:relative;
+  z-index:2;
+  width:min(1100px, 94%);
   margin: 0 auto;
-  padding: 18px 0 40px;
+  padding: 14px 0 40px;
 }
 
-.card {
-  background: rgba(15, 15, 25, 0.82);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 24px;
-  padding: 22px 18px;
-  backdrop-filter: blur(10px);
+/* ===== top nav card (як на твоєму скріні) ===== */
+.topcard{
+  background: rgba(15,15,25,.70);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 18px;
+  padding: 14px 16px;
   box-shadow: 0 0 30px rgba(255, 0, 140, 0.18);
-}
-
-.title {
+  backdrop-filter: blur(10px);
   display:flex;
+  flex-direction:column;
   align-items:center;
-  gap: 14px;
-  margin: 0 0 6px;
-  font-size: 44px;
-}
-
-.subtitle {
-  margin: 0 0 16px;
-  font-family: Arial, sans-serif;
-  opacity: .9;
-}
-
-/* stats block (щоб не було “голого тексту”) */
-.stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
-  margin: 12px 0 14px;
-  font-family: Arial, sans-serif;
 }
 
-.stat {
+.topbrand{
+  letter-spacing:2px;
+  font-size: 22px;
+}
+
+.topnav{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.pill{
+  font-family: Arial, sans-serif;
+  text-decoration:none;
+  color:#fff;
+  opacity:.9;
+  padding:10px 14px;
+  border-radius: 999px;
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 16px;
-  padding: 12px 12px;
+  transition: transform .12s ease, opacity .12s ease, background .12s ease;
+}
+.pill:hover{ opacity:1; transform: scale(1.02); background: rgba(255,255,255,0.10); }
+.pill.active{
+  background: linear-gradient(90deg, var(--pink), var(--vio));
+  border-color: transparent;
+  opacity:1;
 }
 
-.stat .label { opacity: .8; font-size: 13px; margin-bottom: 6px; }
-.stat .value { font-size: 20px; font-weight: 700; }
+.topsub{
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  opacity: .75;
+}
 
-.table {
-  margin-top: 10px;
-  overflow: hidden;
-  border-radius: 18px;
+/* ===== main card ===== */
+.card{
+  margin-top: 14px;
+  background: var(--glass);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 22px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 0 30px rgba(255, 0, 140, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.head{
+  display:grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 12px;
+  align-items:start;
+}
+
+.hicon{
+  font-size: 42px;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+h1{
+  margin:0;
+  font-size: 46px;
+  letter-spacing: 2px;
+}
+.head p{
+  margin: 6px 0 0;
+  font-family: Arial, sans-serif;
+  color: var(--muted);
+}
+
+.filters{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+}
+.filters select{
+  font-family: Arial, sans-serif;
+  color:#fff;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 10px 12px;
+  outline:none;
+}
+
+/* ===== top3 podium ===== */
+.top3{
+  margin-top: 14px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.podium{
+  background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.05);
+  border-radius: 18px;
+  padding: 12px;
+  position:relative;
+  overflow:hidden;
+}
+
+.place{
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  opacity:.85;
+  margin-bottom: 10px;
+}
+
+.avatar{
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  margin: 0 auto 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, var(--pink), var(--vio));
+  box-shadow: 0 0 18px rgba(255, 0, 140, 0.25);
+}
+
+.nick{
+  text-align:center;
+  font-family: "Bangers", system-ui;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  opacity:.95;
+}
+
+.meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: var(--text);
+  opacity:.95;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+/* ===== table ===== */
+.table{
+  margin-top: 14px;
+  border-radius: 18px;
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+}
+
+.thead, .row{
+  display:grid;
+  grid-template-columns: 46px 1.6fr 0.8fr 0.8fr 0.8fr 0.6fr;
+  gap: 10px;
+  align-items:center;
+}
+
+.thead{
+  padding: 12px 14px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  opacity:.85;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.tbody .row{
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
   font-family: Arial, sans-serif;
 }
+.tbody .row:last-child{ border-bottom: none; }
 
-.thead, .row {
-  display: grid;
-  grid-template-columns: 54px 1fr 120px 120px;
-  align-items: center;
+.player{
+  display:flex;
+  align-items:center;
   gap: 10px;
-  padding: 12px 14px;
+  min-width: 0;
 }
 
-.thead {
-  background: rgba(255,255,255,0.06);
-  font-weight: 700;
-  opacity: .95;
+.pfp{
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.10);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
-.row {
-  border-top: 1px solid rgba(255,255,255,0.08);
+.pname{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.right { text-align: right; }
+.right{ text-align:right; }
 
-.footer {
-  display: grid;
+.rankchip{
+  display:inline-flex;
+  justify-content:flex-end;
+  gap: 6px;
+  align-items:center;
+}
+.rankchip .rbadge{
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+/* ===== buttons ===== */
+.btn{
+  display:block;
+  width:100%;
+  border: none;
+  cursor:pointer;
+  text-decoration:none;
+  text-align:center;
+  padding: 14px 14px;
+  border-radius: 16px;
+  color:#fff;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(90deg, var(--pink), var(--vio));
+  transition: transform .12s ease, filter .12s ease;
+}
+.btn:hover{ transform: scale(1.01); filter: brightness(1.05); }
+
+.btn.ghost{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.actions{
+  display:grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-top: 14px;
 }
 
-/* mobile */
-@media (max-width: 560px){
-  .stats { grid-template-columns: 1fr; }
-  .title { font-size: 36px; }
-  .thead, .row { grid-template-columns: 44px 1fr 80px 80px; }
-  .footer { grid-template-columns: 1fr; }
-}
-/* ===== Leaders page: force normal layout (put at end) ===== */
-
-body{
-  display: block !important;      /* перебиває flex з base.css */
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-.page{
-  width: min(1100px, 94%);
-  margin: 0 auto;
-  padding: 16px 0 40px;
-}
-
-.card{
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* TOP-3 grid */
-#top3.top3{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 14px 0;
-}
-
-/* selects row */
-.filters{
-  display:flex;
-  gap:10px;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  margin: 8px 0 10px;
-}
-
-.filters select{
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: #fff;
-  outline: none;
-}
-
-/* table */
-.table{
-  width: 100%;
-  overflow: hidden;
-}
-
-.thead, .row{
-  display: grid;
-  grid-template-columns: 50px 1.6fr 0.9fr 0.8fr 0.8fr 0.6fr;
-  gap: 10px;
-  align-items: center;
-}
-
-.thead{
-  opacity: .85;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-}
-
-.tbody .row{
-  padding: 12px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-}
-
-.right{
-  text-align: right;
-}
-
-/* footer buttons */
 .footer{
-  display: grid;
+  display:grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 14px;
+}
+
+.hint{
+  margin-top: 12px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  opacity: .85;
+  text-align:center;
+}
+
+/* ===== mobile ===== */
+@media (max-width: 800px){
+  .head{
+    grid-template-columns: 46px 1fr;
+  }
+  .filters{
+    grid-column: 1 / -1;
+    justify-content:flex-start;
+  }
 }
 
 @media (max-width: 700px){
-  #top3.top3{
-    grid-template-columns: 1fr;
-  }
+  .top3{ grid-template-columns: 1fr; }
+  h1{ font-size: 38px; }
 
   .thead, .row{
-    grid-template-columns: 36px 1.2fr 0.7fr 0.7fr;
+    grid-template-columns: 36px 1.2fr 0.8fr 0.8fr;
   }
 
-  /* ховаємо менш важливі колонки на телефоні */
+  /* ховаємо Тести і W на телефоні, щоб не ламалося */
   .thead > div:nth-child(5),
   .thead > div:nth-child(6),
   .row  > div:nth-child(5),
@@ -192,7 +368,7 @@ body{
     display:none;
   }
 
-  .footer{
+  .actions, .footer{
     grid-template-columns: 1fr;
   }
 }
