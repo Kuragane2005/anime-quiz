@@ -1,76 +1,83 @@
-const params = new URLSearchParams(location.search);
-const mode = params.get("mode") || "naruto";
-const diff = params.get("diff") || "easy";// ===== 5 Easy quizzes =====
-const QUIZZES = {
-  naruto: {
-    title: "Naruto (Easy)",
-    questions: [
-      { q: "Хто головний герой Naruto?", a: ["Саске", "Наруто", "Какаші", "Ітачі"], c: 1 },
-      { q: "Як звати суперника Наруто з команди 7?", a: ["Гаара", "Саске", "Недзі", "Кіба"], c: 1 },
-      { q: "Хто сенсей команди 7?", a: ["Джирая", "Какаші", "Орочімару", "Цунаде"], c: 1 },
-      { q: "Яка істота запечатана в Наруто?", a: ["Дев'ятихвостий лис", "Десятихвостий", "Дракон", "Вовк"], c: 0 },
-      { q: "Як називається село Наруто?", a: ["Прихований Туман", "Прихований Пісок", "Прихований Лист", "Прихований Камінь"], c: 2 },
-    ],
-  },
-
-  hunter: {
-    title: "Hunter x Hunter (Easy)",
-    questions: [
-      { q: "Хто головний герой Hunter x Hunter?", a: ["Кілуа", "Гон", "Курапіка", "Леоріо"], c: 1 },
-      { q: "Кілуа з якої родини?", a: ["Узумаки", "Золдік", "Учіха", "Хатаке"], c: 1 },
-      { q: "Як називається енергія/система сил у HxH?", a: ["Рейацу", "Нен", "Чакра", "Кі"], c: 1 },
-      { q: "Курапіка хоче помститися за клан…", a: ["Учіха", "Курата", "Курата (Scarlet Eyes)", "Золдік"], c: 2 },
-      { q: "Леоріо мріє стати…", a: ["Хантером звірів", "Доктором", "Піратом", "Шаманом"], c: 1 },
-    ],
-  },
-
-  bleach: {
-    title: "Bleach (Easy)",
-    questions: [
-      { q: "Хто головний герой Bleach?", a: ["Ічіґо", "Айзен", "Ренджі", "Урю"], c: 0 },
-      { q: "Рукія — це…", a: ["Ніндзя", "Шініґамі", "Пірат", "Маг"], c: 1 },
-      { q: "Як називається меч шініґамі?", a: ["Кунай", "Занпакто", "Нодаті", "Клеймор"], c: 1 },
-      { q: "Айзен — це…", a: ["Капітан", "Холлоу", "Учень", "Пірат"], c: 0 },
-      { q: "Як називається світ шініґамі?", a: ["Soul Society", "Академія", "Марінфорд", "Коноха"], c: 0 },
-    ],
-  },
-
-  sao: {
-    title: "Sword Art Online (Easy)",
-    questions: [
-      { q: "Як звати головного героя SAO?", a: ["Кіріто", "Ерен", "Лайт", "Ічіґо"], c: 0 },
-      { q: "Як звати головну героїню SAO?", a: ["Мікаса", "Асуна", "Міса", "Незуко"], c: 1 },
-      { q: "SAO — це в першу чергу про…", a: ["Школу", "Гру VR", "Піратів", "Ніндзя"], c: 1 },
-      { q: "У SAO гравці не можуть вийти, бо…", a: ["Немає інтернету", "Їх замкнули в грі", "Вони загубилися", "Забули пароль"], c: 1 },
-      { q: "Зброя Кіріто відома тим, що він…", a: ["Лучник", "Дворукий мечник", "Два мечі (dual wield)", "Маг"], c: 2 },
-    ],
-  },
-
-  mha: {
-    title: "My Hero Academia (Easy)",
-    questions: [
-      { q: "Хто головний герой MHA?", a: ["Бакуґо", "Деку (Ізуку)", "Тодорокі", "Алл МайТ"], c: 1 },
-      { q: "Як називаються здібності у MHA?", a: ["Причуди (Quirks)", "Нен", "Чакра", "Рейацу"], c: 0 },
-      { q: "Хто символ миру в MHA?", a: ["Ендевор", "Алл МайТ", "Шіґаракі", "Стейн"], c: 1 },
-      { q: "Бакуґо має причуду…", a: ["Лід", "Вибухи", "Тінь", "Телепорт"], c: 1 },
-      { q: "Тодорокі відомий поєднанням…", a: ["Вогонь і лід", "Грім і вода", "Земля і вітер", "Світло і тінь"], c: 0 },
-    ],
-  },
+// =====================
+// QUIZ CONFIG
+// =====================
+const DIFF = {
+  easy:      { time: 12, xpBase: 100, xpMult: 1.0 },
+  medium:    { time: 10, xpBase: 120, xpMult: 1.2 },
+  hard:      { time: 8,  xpBase: 150, xpMult: 1.5 },
+  impossible:{ time: 6,  xpBase: 200, xpMult: 2.0 },
 };
 
-// --- pick quiz from URL ---
-const params = new URLSearchParams(location.search);
-const mode = (params.get("mode") || "naruto").toLowerCase();
-const quiz = QUIZZES[mode] || QUIZZES.naruto;
-const questions = quiz.questions;
+// 10 питань на кожне аніме (легкий рівень, але ми використовуємо для всіх складностей з різним таймером/XP)
+const BANK = {
+  naruto: [
+    { q:"Хто головний герой Naruto?", a:["Саске","Наруто","Какаші","Ітачі"], c:1 },
+    { q:"Як звати лиса всередині Наруто?", a:["Шукаку","Курама","Мататабі","Ісобу"], c:1 },
+    { q:"Хто вчитель Наруто в команді 7?", a:["Какаші","Джирайя","Гай","Орочімару"], c:0 },
+    { q:"Село Наруто — це…", a:["Суна","Кірі","Коноха","Кумо"], c:2 },
+    { q:"Хто друг/суперник Наруто?", a:["Шикамару","Саске","Кіба","Неджі"], c:1 },
+    { q:"Яка техніка Наруто найвідоміша?", a:["Чідорі","Расенган","Аматаерасу","Сусаноо"], c:1 },
+    { q:"Клан Саске — це…", a:["Хьюга","Учіха","Акімічі","Нара"], c:1 },
+    { q:"Хто такий Хокаге?", a:["Лідер села","Лідер Акацукі","Учитель","Медик"], c:0 },
+    { q:"Яка стихія у Саске найчастіше?", a:["Вода","Земля","Блискавка","Вітер"], c:2 },
+    { q:"Орочімару — це…", a:["Хокаге","Саннін","Дзінчурікі","Анбу"], c:1 },
+  ],
+  hxh: [
+    { q:"Головний герой HxH?", a:["Кіллуа","Гон","Курапіка","Леоріо"], c:1 },
+    { q:"Найкращий друг Гона?", a:["Хісока","Кіллуа","Чролло","Ілумі"], c:1 },
+    { q:"Система сили в HxH називається…", a:["Чакра","Кі","Нен","Хакі"], c:2 },
+    { q:"Курапіка полює на…", a:["Піратів","Павуків","Титанів","Демонів"], c:1 },
+    { q:"Хісока — це…", a:["Мисливець","Клоун","Хокаге","Шінігамі"], c:1 },
+    { q:"Клан Курапіки має очі…", a:["Сині","Червоні","Зелені","Фіолетові"], c:1 },
+    { q:"Леоріо хоче стати…", a:["Лікарем","Королем","Магом","Ніндзя"], c:0 },
+    { q:"Гон здає екзамен на…", a:["Мисливця","Шінігамі","Пірата","Героя"], c:0 },
+    { q:"Чролло — лідер…", a:["Акацукі","Фантом Трупи","Готей 13","Віллеінів"], c:1 },
+    { q:"Кіллуа родом з сім’ї…", a:["Учіха","Золдік","Хьюга","Ельдія"], c:1 },
+  ],
+  bleach: [
+    { q:"Головний герой Bleach?", a:["Ічіго","Рукія","Айзен","Ренджі"], c:0 },
+    { q:"Рукія — це…", a:["Ніндзя","Шінігамі","Пірат","Герой"], c:1 },
+    { q:"Зброя шінігамі називається…", a:["Кунай","Занпакто","Катана Хокаге","Екскалібур"], c:1 },
+    { q:"Айзен — це…", a:["Антагоніст","Хокаге","Дзінчурікі","Пірат"], c:0 },
+    { q:"Суспільство душ — це…", a:["Сейрейтэй","Коноха","Маріінфорд","Айнкрад"], c:0 },
+    { q:"Холлоу — це…", a:["Дух-монстр","Пірат","Титан","Маг"], c:0 },
+    { q:"Ічіго отримав сили від…", a:["Рукії","Наруто","Гона","Кіріто"], c:0 },
+    { q:"Готей 13 — це…", a:["Орден магів","Пірати","Загін шінігамі","Мисливці"], c:2 },
+    { q:"Банкай — це…", a:["Рівень в Наруто","Форма Занпакто","Меч Кіріто","Техніка Нен"], c:1 },
+    { q:"Ренджі — напарник…", a:["Ічіго","Саске","Гона","Еренa"], c:0 },
+  ],
+  sao: [
+    { q:"Головний герой SAO?", a:["Кіріто","Асуна","Юджіо","Клейн"], c:0 },
+    { q:"SAO — це…", a:["Гра VRMMO","Ніндзя-світ","Суспільство душ","Острів піратів"], c:0 },
+    { q:"Ім’я Кіріто в грі?", a:["Казуто","Кіріто","Рукія","Гон"], c:1 },
+    { q:"Асуна — це…", a:["Партнерка Кіріто","Холлоу","Хокаге","Титан"], c:0 },
+    { q:"Перший світ SAO називався…", a:["Айнкрад","Коноха","Сейрейтэй","Йоркнью"], c:0 },
+    { q:"Гільдія з Лісбет/Сілікою — це…", a:["Друзі Кіріто","Вороги Айзена","Павуки","Акацукі"], c:0 },
+    { q:"Основна проблема SAO на старті?", a:["Не можна вийти з гри","Нема енергії","Пірати напали","Холлоу прийшли"], c:0 },
+    { q:"“HP” в іграх означає…", a:["Здоров’я","Хакі","Холлоу Поінти","Хокаге Поінти"], c:0 },
+    { q:"Кіріто відомий як…", a:["Чорний мечник","Шінігамі","Хокаге","Мисливець"], c:0 },
+    { q:"Юі — це…", a:["AI-дитина","Занпакто","Титан","Нен-звір"], c:0 },
+  ],
+  mha: [
+    { q:"Головний герой MHA?", a:["Бакуго","Деку","Тодорокі","All Might"], c:1 },
+    { q:"Сила в MHA називається…", a:["Нен","Причуда","Чакра","Хакі"], c:1 },
+    { q:"Справжнє ім’я Деку?", a:["Ізуку Мідорія","Кацкі Бакуго","Шото Тодорокі","Томура Шігаракі"], c:0 },
+    { q:"All Might передав силу…", a:["Деку","Бакуго","Шото","Ічіго"], c:0 },
+    { q:"Школа героїв — це…", a:["UA","Коноха","Готей","Айнкрад"], c:0 },
+    { q:"Бакуго має причуду…", a:["Вибухи","Лід","Павутина","Грім"], c:0 },
+    { q:"Тодорокі використовує…", a:["Вогонь і лід","Тільки воду","Тільки землю","Нен"], c:0 },
+    { q:"Лиходій з руками на обличчі?", a:["Шігаракі","Айзен","Хісока","Кісаме"], c:0 },
+    { q:"Герої в MHA носять…", a:["Костюми","Занпакто","Плащі Акацукі","Маски холлоу"], c:0 },
+    { q:"One For All — це…", a:["Сила що накопичується","Занпакто","Нен-техніка","VR-гра"], c:0 },
+  ],
+};
 
-// ===== your quiz logic (same as before, but using questions above) =====
-let current = 0;
-let score = 0;
-let streak = 0;
-let earnedXP = 0;
-let timeLeft = 10;
-let timerInterval;
+// =====================
+// ELEMENTS
+// =====================
+const screenSelect = document.getElementById("screenSelect");
+const screenQuiz = document.getElementById("screenQuiz");
+const startBtn = document.getElementById("startBtn");
 
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
@@ -82,43 +89,128 @@ const progressFill = document.getElementById("progressFill");
 const streakText = document.getElementById("streakText");
 const xpText = document.getElementById("xpText");
 
-// optional: show title somewhere if you add <div id="quizTitle"></div>
-const quizTitleEl = document.getElementById("quizTitle");
-if (quizTitleEl) quizTitleEl.textContent = quiz.title;
+const sClick = document.getElementById("sClick");
+const sCorrect = document.getElementById("sCorrect");
+const sWrong = document.getElementById("sWrong");
+const containerEl = document.querySelector(".container");
 
-function updateProgressUI() {
-  const total = questions.length;
-  const currentNum = current + 1;
+// =====================
+// STATE
+// =====================
+let selectedDiff = null;
+let selectedAnime = null;
+
+let questions = [];
+let current = 0;
+let score = 0;
+let streak = 0;
+let earnedXP = 0;
+
+let timeLeft = 10;
+let timerInterval = null;
+
+// =====================
+// HELPERS
+// =====================
+function playSound(audioEl) {
+  if (!audioEl) return;
+  audioEl.currentTime = 0;
+  audioEl.play().catch(() => {});
+}
+function vibrate(ms = 40) {
+  if (navigator.vibrate) navigator.vibrate(ms);
+}
+function shake() {
+  if (!containerEl) return;
+  containerEl.classList.remove("shake");
+  void containerEl.offsetWidth;
+  containerEl.classList.add("shake");
+}
+
+function updateProgressUI(){
+  const total = questions.length || 1;
+  const currentNum = Math.min(current + 1, total);
 
   if (progressText) progressText.textContent = `Питання ${currentNum}/${total}`;
   if (progressFill) progressFill.style.width = `${(currentNum / total) * 100}%`;
+
   if (streakText) streakText.textContent = `🔥 Серія: ${streak}`;
   if (xpText) xpText.textContent = `⚡ XP: ${earnedXP}`;
 }
 
-function loadQuestion() {
-  clearInterval(timerInterval);
-  timeLeft = 10;
+function setStartEnabled(){
+  startBtn.disabled = !(selectedDiff && selectedAnime);
+  startBtn.style.opacity = startBtn.disabled ? "0.6" : "1";
+}
 
-  timerEl.textContent = `⏱ ${timeLeft}`;
+// =====================
+// SELECT SCREEN LOGIC
+// =====================
+document.querySelectorAll("[data-diff]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    selectedDiff = btn.dataset.diff;
+    document.querySelectorAll("[data-diff]").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    setStartEnabled();
+  });
+});
+
+document.querySelectorAll("[data-anime]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    selectedAnime = btn.dataset.anime;
+    document.querySelectorAll("[data-anime]").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    setStartEnabled();
+  });
+});
+
+startBtn.addEventListener("click", () => {
+  startGame();
+});
+
+// =====================
+// GAME
+// =====================
+function startGame(){
+  // reset
+  current = 0;
+  score = 0;
+  streak = 0;
+  earnedXP = 0;
+
+  const cfg = DIFF[selectedDiff] || DIFF.easy;
+  questions = (BANK[selectedAnime] || BANK.naruto).slice(); // копія
+
+  screenSelect.classList.add("hidden");
+  screenQuiz.classList.remove("hidden");
+
+  loadQuestion(cfg);
+}
+
+function loadQuestion(cfg){
+  clearInterval(timerInterval);
+
+  timeLeft = cfg.time;
+  timerEl.innerText = `⏱ ${timeLeft}`;
+
   nextBtn.classList.add("hidden");
   answersEl.innerHTML = "";
 
-  questionEl.textContent = questions[current].q;
+  updateProgressUI();
+  questionEl.innerText = questions[current].q;
 
   questions[current].a.forEach((answer, index) => {
     const btn = document.createElement("div");
     btn.className = "answer";
-    btn.textContent = answer;
-    btn.onclick = () => selectAnswer(index);
+    btn.innerText = answer;
+    btn.onclick = () => selectAnswer(index, cfg);
     answersEl.appendChild(btn);
   });
 
-  updateProgressUI();
-
   timerInterval = setInterval(() => {
     timeLeft--;
-    timerEl.textContent = `⏱ ${timeLeft}`;
+    timerEl.innerText = `⏱ ${timeLeft}`;
+
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       disableAnswers();
@@ -127,46 +219,65 @@ function loadQuestion() {
   }, 1000);
 }
 
-function selectAnswer(index) {
-  clearInterval(timerInterval);
+function disableAnswers(){
+  document.querySelectorAll(".answer").forEach(el => el.classList.add("disabled"));
+}
 
-  const correctIndex = questions[current].c;
+function selectAnswer(index, cfg){
+  clearInterval(timerInterval);
+  playSound(sClick);
+
   const allAnswers = document.querySelectorAll(".answer");
+  const correctIndex = questions[current].c;
 
   allAnswers.forEach((el, i) => {
     el.classList.add("disabled");
     if (i === index) el.classList.add("selected");
   });
 
-  if (index === correctIndex) {
+  const isCorrect = index === correctIndex;
+
+  if (isCorrect){
     score++;
     streak++;
-    earnedXP += 100 + Math.min(50, streak * 5);
+    const bonus = Math.min(60, streak * 6);
+    const gained = Math.round((cfg.xpBase + bonus) * cfg.xpMult);
+    earnedXP += gained;
+
+    playSound(sCorrect);
+    vibrate(60);
   } else {
     streak = 0;
+    playSound(sWrong);
+    vibrate(120);
+    shake();
   }
 
   updateProgressUI();
   nextBtn.classList.remove("hidden");
 }
 
-function disableAnswers() {
-  document.querySelectorAll(".answer").forEach(el => el.classList.add("disabled"));
-}
-
-nextBtn.onclick = () => {
+nextBtn.addEventListener("click", () => {
   current++;
-  if (current < questions.length) {
-    loadQuestion();
+  const cfg = DIFF[selectedDiff] || DIFF.easy;
+
+  if (current < questions.length){
+    loadQuestion(cfg);
   } else {
-    // Save last results (for result.html later)
-    localStorage.setItem("lastScore", score);
-    localStorage.setItem("lastXP", earnedXP);
-    localStorage.setItem("lastMode", mode);
+    // збереження
+    localStorage.setItem("lastScore", String(score));
+    localStorage.setItem("lastXP", String(earnedXP));
 
-    location.href = "result.html";
+    const totalXP = Number(localStorage.getItem("totalXP") || 0);
+    localStorage.setItem("totalXP", String(totalXP + earnedXP));
+
+    const bestScore = Number(localStorage.getItem("bestScore") || 0);
+    if (score > bestScore) localStorage.setItem("bestScore", String(score));
+
+    // назад на головну (можеш змінити на result.html, якщо зробиш)
+    location.href = "./index.html";
   }
-};
+});
 
-loadQuestion();
-
+// стартова кнопка неактивна поки не обрано все
+setStartEnabled();
