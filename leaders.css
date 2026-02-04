@@ -91,3 +91,108 @@
   .thead, .row { grid-template-columns: 44px 1fr 80px 80px; }
   .footer { grid-template-columns: 1fr; }
 }
+/* ===== Leaders page: force normal layout (put at end) ===== */
+
+body{
+  display: block !important;      /* перебиває flex з base.css */
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.page{
+  width: min(1100px, 94%);
+  margin: 0 auto;
+  padding: 16px 0 40px;
+}
+
+.card{
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* TOP-3 grid */
+#top3.top3{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 14px 0;
+}
+
+/* selects row */
+.filters{
+  display:flex;
+  gap:10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin: 8px 0 10px;
+}
+
+.filters select{
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  outline: none;
+}
+
+/* table */
+.table{
+  width: 100%;
+  overflow: hidden;
+}
+
+.thead, .row{
+  display: grid;
+  grid-template-columns: 50px 1.6fr 0.9fr 0.8fr 0.8fr 0.6fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.thead{
+  opacity: .85;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.tbody .row{
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.right{
+  text-align: right;
+}
+
+/* footer buttons */
+.footer{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+@media (max-width: 700px){
+  #top3.top3{
+    grid-template-columns: 1fr;
+  }
+
+  .thead, .row{
+    grid-template-columns: 36px 1.2fr 0.7fr 0.7fr;
+  }
+
+  /* ховаємо менш важливі колонки на телефоні */
+  .thead > div:nth-child(5),
+  .thead > div:nth-child(6),
+  .row  > div:nth-child(5),
+  .row  > div:nth-child(6){
+    display:none;
+  }
+
+  .footer{
+    grid-template-columns: 1fr;
+  }
+}
