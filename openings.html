@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Опенінги</title>
+  <title>Опенінги — Anime Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="openings.css">
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SZ0N5MXX12"></script>
 <script>
@@ -16,23 +17,64 @@
   gtag('config', 'G-SZ0N5MXX12');
 </script>
 </head>
-<body>
 
-<header class="topbar">
-  <a class="brand" href="index.html">ANIME QUIZ</a>
-  <nav class="nav">
-    <a href="tests.html">Тести</a>
-    <a href="openings.html">Опенінги</a>
-    <a href="leaderboard.html">Лідери</a>
-    <a href="ranks.html">Ранги</a>
-  </nav>
-</header>
+<body class="page">
+  <header class="topbar">
+    <a class="brand" href="./index.html">🔥 ANIME HUB</a>
+    <nav class="nav">
+      <a href="./tests.html">Тести</a>
+      <a class="active" href="./openings.html">Опенінги</a>
+      <a href="./leaders.html">Лідери</a>
+      <a href="./ranks.html">Ранги</a>
+    </nav>
+  </header>
 
-<div class="container">
-  <h1>🎵 Вгадай аніме по опенінгу</h1>
-  <p>Скоро: таймер, бали за швидкість, топ гравців.</p>
-  <button class="btn" disabled>⏳ В розробці</button>
-</div>
+  <main class="wrap">
+    <section class="panel">
+      <h1>🎵 Опенінги</h1>
+      <p class="sub">Вгадай аніме по опенінгу. Скоро додамо багато паків.</p>
 
+      <div class="cards">
+        <div class="card disabled">
+          <div class="card-top">
+            <b>Легко</b>
+            <span class="tag">SOON</span>
+          </div>
+          <p>10 опенінгів • з підказками</p>
+        </div>
+
+        <div class="card disabled">
+          <div class="card-top">
+            <b>Середньо</b>
+            <span class="tag">SOON</span>
+          </div>
+          <p>15 опенінгів • без підказок</p>
+        </div>
+
+        <div class="card disabled">
+          <div class="card-top">
+            <b>Хардкор</b>
+            <span class="tag">SOON</span>
+          </div>
+          <p>20 опенінгів • таймер 10с</p>
+        </div>
+
+        <div class="card disabled">
+          <div class="card-top">
+            <b>Мікс топ</b>
+            <span class="tag">SOON</span>
+          </div>
+          <p>Опенінги з різних аніме</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="./index.html">← На головну</a>
+        <a class="btn ghost" href="./tests.html">🧠 Піти в тести</a>
+      </div>
+
+      <p class="hint">Порада: коли зробимо опенінги — це буде найвірусніший режим для TikTok 😈</p>
+    </section>
+  </main>
 </body>
 </html>
