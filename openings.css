@@ -1,12 +1,14 @@
 .wrap{
   width: min(980px, 94%);
   margin: 0 auto;
-  padding: 18px 0 40px;
+  padding: 18px 0 44px;
+  position: relative;
+  z-index: 3;
 }
 
 .panel{
   width: min(820px, 100%);
-  margin: 40px auto;
+  margin: 26px auto 0;
   padding: 26px 22px;
   border-radius: 22px;
   background: rgba(15, 15, 25, 0.82);
@@ -43,6 +45,14 @@
   background: rgba(255,255,255,0.08);
   border:1px solid rgba(255,255,255,0.10);
   font-family: Arial, sans-serif;
+  text-decoration:none;
+  color:#fff;
+  transition: transform .15s ease, background .15s ease;
+}
+
+.card:hover{
+  transform: scale(1.01);
+  background: rgba(255,255,255,0.12);
 }
 
 .card-top{
@@ -64,6 +74,7 @@
 
 .card.disabled{
   opacity: .6;
+  pointer-events:none;
 }
 
 .actions{
@@ -81,7 +92,7 @@
 }
 
 @media (max-width: 520px){
-  .panel{ margin: 18px auto; }
+  .panel{ padding: 20px 16px; }
   .panel h1{ font-size: 34px; }
   .cards{ grid-template-columns: 1fr; }
   .actions{ grid-template-columns: 1fr; }
