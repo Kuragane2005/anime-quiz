@@ -3,48 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ранги</title>
+  <title>Мій ранг — Anime Hub</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="base.css">
-<link rel="stylesheet" href="ranks.css">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZ0N5MXX12"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SZ0N5MXX12');
-</script>
+  <link rel="stylesheet" href="ranks.css">
 </head>
-<body>
 
-<header class="topbar">
-  <a class="brand" href="index.html">ANIME QUIZ</a>
-  <nav class="nav">
-    <a href="tests.html">Тести</a>
-    <a href="openings.html">Опенінги</a>
-    <a href="leaders.html">Лідери</a>
-    <a href="ranks.html">Ранги</a>
-  </nav>
-</header>
+<body class="page-ranks">
 
-<div class="container">
-  <h1>📈 Ранги</h1>
-  <p>Скільки потрібно пройти, щоб піднятись</p>
+  <!-- HEADER -->
+  <header class="rank-header">
+    <a class="logo" href="./index.html">🔥 ANIME HUB</a>
 
-  <div class="rank-list">
-    <div class="rank-row">🌱 Genin <span>0+ XP</span></div>
-    <div class="rank-row">⚡ Chunin <span>200 XP</span></div>
-    <div class="rank-row">🔥 Jonin <span>500 XP</span></div>
-    <div class="rank-row">👑 Kage <span>900 XP</span></div>
-    <div class="rank-row">🌌 Legend <span>1500 XP</span></div>
-  </div>
+    <nav class="rank-nav">
+      <a href="tests.html">Тести</a>
+      <a href="openings.html">Опенінги</a>
+      <a href="leaders.html">Лідери</a>
+      <a class="active" href="ranks.html">Ранги</a>
+    </nav>
+  </header>
 
-  <p style="margin-top:12px; font-family: Arial, sans-serif; opacity:.9;">
-    Пізніше ми зробимо XP за тести/опенінги + прогрес-бар.
-  </p>
-</div>
+  <!-- CONTENT -->
+  <main class="wrap">
+    <section class="rank-card">
+      <h1>⭐ Мій ранг</h1>
+      <p class="sub">Проходь тести та відкривай нові ранги</p>
+
+      <div class="grid">
+        <div class="box">
+          <div class="label">Поточний ранг</div>
+          <div class="value">B ⚡</div>
+        </div>
+        <div class="box">
+          <div class="label">XP</div>
+          <div class="value">420</div>
+        </div>
+      </div>
+
+      <div class="progress">
+        <div class="progress-top">
+          <span>До рангу A</span>
+          <span>420 / 600 XP</span>
+        </div>
+        <div class="bar">
+          <div class="fill" style="width:70%"></div>
+        </div>
+        <div class="hint">Ще 180 XP до наступного рангу</div>
+      </div>
+
+      <div class="actions">
+        <a class="btn ghost" href="./index.html">← На головну</a>
+        <a class="btn" href="tests.html">▶ Пройти тест</a>
+      </div>
+    </section>
+  </main>
 
 </body>
 </html>
