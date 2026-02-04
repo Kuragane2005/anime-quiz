@@ -3,19 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Таблиця лідерів — Anime Hub</title>
-
+  <title>Лідери — Anime Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="leaders.css">
 </head>
 
-<body class="page-leaders">
-
-  <!-- Шапка (як на openings) -->
-  <header class="site-header">
-    <a class="logo" href="index.html">🔥 ANIME HUB</a>
-
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">🔥 ANIME HUB</a>
     <nav class="nav">
       <a href="tests.html">Тести</a>
       <a href="openings.html">Опенінги</a>
@@ -24,63 +20,55 @@
     </nav>
   </header>
 
-  <main class="wrap">
-    <section class="card big">
-      <div class="title-row">
-        <div class="title">
-          <div class="emoji">🏆</div>
-          <div>
-            <h1>Таблиця лідерів</h1>
-            <p class="sub">Топ гравців за XP і результатами тестів</p>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button class="btn ghost" id="demoBtn">Заповнити демо</button>
-          <button class="btn danger" id="clearBtn">Очистити</button>
+  <main class="page">
+    <section class="card">
+      <div class="title">
+        <div class="icon">🏆</div>
+        <div>
+          <h1>Таблиця лідерів</h1>
+          <p>Топ гравців за XP і результатами тестів</p>
         </div>
       </div>
 
-      <div class="stats">
-        <div class="stat">
-          <div class="statLabel">Учасників</div>
-          <div class="statValue" id="countPlayers">0</div>
-        </div>
-        <div class="stat">
-          <div class="statLabel">Твій нік</div>
-          <div class="statValue" id="meName">—</div>
-        </div>
-        <div class="stat">
-          <div class="statLabel">Твій XP</div>
-          <div class="statValue" id="meXp">0</div>
-        </div>
-      </div>
-<select id="sort">
-  <option value="xp">XP</option>
-  <option value="tests">Тести</option>
-  <option value="wins">Рекорд</option>
-</select>
+      <div class="filters">
+        <select id="period">
+          <option value="all">За весь час</option>
+          <option value="week">За тиждень</option>
+          <option value="day">За день</option>
+        </select>
 
-<div id="top3"></div>
-<div id="list"></div>
+        <select id="sort">
+          <option value="xp">Сортувати: XP</option>
+          <option value="tests">Сортувати: Тести</option>
+          <option value="wins">Сортувати: Рекорд</option>
+        </select>
+      </div>
+
+      <!-- TOP 3 -->
+      <div id="top3" class="top3"></div>
+
+      <!-- TABLE -->
       <div class="table">
         <div class="thead">
           <div>#</div>
           <div>Гравець</div>
+          <div class="right">Ранг</div>
           <div class="right">XP</div>
-          <div class="right">Рекорд</div>
+          <div class="right">Тести</div>
+          <div class="right">W</div>
         </div>
-
-        <div id="rows" class="tbody"></div>
+        <div id="list" class="tbody"></div>
       </div>
 
       <div class="footer">
-        <a class="btn ghost" href="./index.html" data-nav>← На головну</a>
-        <a class="btn" href="tests.html">▶ Пройти тест</a>
+        <a class="btn ghost" href="./index.html">← На головну</a>
+        <a class="btn" href="tests.html">▶ Грати тести</a>
       </div>
+
+      <p class="hint">Порада: за 1 тест ти отримуєш XP. Чим більше серія — тим вищий ранг 😈</p>
     </section>
   </main>
 
-  <script src="./leaders.js"></script>
+  <script src="leaders.js"></script>
 </body>
 </html>
